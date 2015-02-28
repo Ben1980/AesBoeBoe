@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
@@ -20,6 +21,7 @@ public class resultListActivity extends ActionBarActivity {
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
+    private ConnectionList list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,10 @@ public class resultListActivity extends ActionBarActivity {
         Worker worker = new Worker();
         worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
         try {
-            ConnectionList list = worker.get();
+            list = worker.get();
+
+            ListView listview = (ListView) findViewById(R.id.listView);
+            //listview.add
         }
         catch (ExecutionException e) {
             e.printStackTrace();
