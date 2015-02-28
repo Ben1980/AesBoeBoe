@@ -20,6 +20,10 @@
             android:name=".aboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name=".resultListActivity"
+            android:label="@string/title_activity_result_list" >
+        </activity>
     </application>
 
 </manifest>
