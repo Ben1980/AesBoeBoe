@@ -1,11 +1,18 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.util.concurrent.ExecutionException;
+
+import ch.schoeb.opendatatransport.IOpenTransportRepository;
+import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
+import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
 public class resultListActivity extends ActionBarActivity {
@@ -30,6 +37,19 @@ public class resultListActivity extends ActionBarActivity {
         tvResultTo.setText(intent.getStringExtra("to"));
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
+
+        Worker worker = new Worker();
+        worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
+        try {
+            ConnectionList list = worker.get();
+        }
+        catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //new Worker().execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
     }
 
 
@@ -53,5 +73,43 @@ public class resultListActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    class Worker extends AsyncTask<String, Integer, ConnectionList> {
+
+
+        private IOpenTransportRepository connectionSearch;
+        private ConnectionList connectionList;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+         connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
+         connectionList = new ConnectionList();
+
+        }
+
+        @Override
+        protected void onPostExecute(ConnectionList result) {
+            super.onPostExecute(result);
+            result = connectionList;
+
+        }
+
+        @Override
+        protected ConnectionList doInBackground(String... arg) {
+
+        connectionList = connectionSearch.searchConnections(arg[0], arg[1] );
+
+            return connectionList;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+
+
+        }
     }
 }
