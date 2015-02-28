@@ -5,11 +5,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
+    private EditText from;
+    private EditText to;
+    private EditText date;
+    private EditText time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +22,16 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         Button search = (Button) findViewById(R.id.btSearch);
-        EditText from = (EditText) findViewById(R.id.etFromField);
-        EditText to = (EditText) findViewById(R.id.etToField);
-        EditText date = (EditText) findViewById(R.id.etDateField);
-        EditText time = (EditText) findViewById(R.id.etTimeField);
+        from = (EditText) findViewById(R.id.etFromField);
+        to = (EditText) findViewById(R.id.etToField);
+        date = (EditText) findViewById(R.id.etDateField);
+        time = (EditText) findViewById(R.id.etTimeField);
 
-        search.setOnClickListener((v) -> {
-
+        search.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSearch();
+            }
         });
 
 
@@ -53,5 +61,16 @@ public class MainActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void startSearch() {
+        Intent intent = new Intent(this, resultListActivity.class);
+
+        intent.putExtra("from", from.getText().toString());
+        intent.putExtra("to", to.getText().toString());
+        intent.putExtra("date", date.getText().toString());
+        intent.putExtra("time", time.getText().toString());
+
+        startActivity(intent);
     }
 }

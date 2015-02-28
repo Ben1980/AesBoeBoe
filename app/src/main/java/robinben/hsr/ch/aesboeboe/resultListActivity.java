@@ -1,17 +1,35 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class resultListActivity extends ActionBarActivity {
+    private TextView tvResultFrom;
+    private TextView tvResultTo;
+    private TextView tvResultDate;
+    private TextView tvResultTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_list);
+
+        tvResultFrom = (TextView) findViewById(R.id.tvResultFrom);
+        tvResultTo = (TextView) findViewById(R.id.tvResultTo);
+        tvResultDate = (TextView) findViewById(R.id.tvResultDate);
+        tvResultTime = (TextView) findViewById(R.id.tvResultTime);
+
+        Intent intent = getIntent();
+
+        tvResultFrom.setText(intent.getStringExtra("from"));
+        tvResultTo.setText(intent.getStringExtra("to"));
+        tvResultDate.setText(intent.getStringExtra("date"));
+        tvResultTime.setText(intent.getStringExtra("time"));
     }
 
 
