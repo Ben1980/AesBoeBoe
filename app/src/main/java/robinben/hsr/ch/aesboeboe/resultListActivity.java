@@ -40,20 +40,21 @@ public class resultListActivity extends ActionBarActivity {
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
 
-        Worker worker = new Worker();
-        worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
-        try {
-            list = worker.get();
+        //Worker worker = new Worker();
+        //worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
+        //try {
+            new Worker().execute(intent.getStringExtra("from"), intent.getStringExtra("to"));
+            //list = worker.get();
 
-            ListView listview = (ListView) findViewById(R.id.listView);
+            //ListView listview = (ListView) findViewById(R.id.listView);
             //listview.add
-        }
-        catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //}
+        //catch (ExecutionException e) {
+            //e.printStackTrace();
+        //}
+        //catch (InterruptedException e) {
+            //e.printStackTrace();
+        //}
         //new Worker().execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
     }
 
@@ -91,7 +92,7 @@ public class resultListActivity extends ActionBarActivity {
             super.onPreExecute();
 
          connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
-         connectionList = new ConnectionList();
+         //connectionList = new ConnectionList();
 
         }
 
@@ -105,7 +106,7 @@ public class resultListActivity extends ActionBarActivity {
         @Override
         protected ConnectionList doInBackground(String... arg) {
 
-        connectionList = connectionSearch.searchConnections(arg[0], arg[1] );
+        connectionList = connectionSearch.searchConnections(arg[0], arg[1]);
 
             return connectionList;
         }
