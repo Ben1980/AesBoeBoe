@@ -1,25 +1,24 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
-import ch.schoeb.opendatatransport.IOpenTransportRepository;
-import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
 import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
-public class resultListActivity extends ActionBarActivity {
+public class ResultListActivity extends ActionBarActivity {
     private TextView tvResultFrom;
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
+    private ConnectionList list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,12 @@ public class resultListActivity extends ActionBarActivity {
         Worker worker = new Worker();
         worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
         try {
-            ConnectionList list = worker.get();
+            list = worker.get();
+
+            ListView listView = (ListView)findViewById(R.id.listView);
+
+            ConnectionAdapter adapter = new ConnectionAdapter(this, list);
+            listView.setAdapter(adapter);
         }
         catch (ExecutionException e) {
             e.printStackTrace();
@@ -49,9 +53,7 @@ public class resultListActivity extends ActionBarActivity {
         catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //new Worker().execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,43 +75,5 @@ public class resultListActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    class Worker extends AsyncTask<String, Integer, ConnectionList> {
-
-
-        private IOpenTransportRepository connectionSearch;
-        private ConnectionList connectionList;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-         connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
-         connectionList = new ConnectionList();
-
-        }
-
-        @Override
-        protected void onPostExecute(ConnectionList result) {
-            super.onPostExecute(result);
-            result = connectionList;
-
-        }
-
-        @Override
-        protected ConnectionList doInBackground(String... arg) {
-
-        connectionList = connectionSearch.searchConnections(arg[0], arg[1] );
-
-            return connectionList;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-
-
-        }
     }
 }

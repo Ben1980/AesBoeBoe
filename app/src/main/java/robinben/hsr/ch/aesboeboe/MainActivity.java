@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
 
         switch (id) {
             case R.id.action_about:
-                final Intent intent = new Intent(this, aboutActivity.class);
+                final Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void startSearch() {
-        Intent intent = new Intent(this, resultListActivity.class);
+        Intent intent = new Intent(this, ResultListActivity.class);
 
         intent.putExtra("from", from.getText().toString());
         intent.putExtra("to", to.getText().toString());
