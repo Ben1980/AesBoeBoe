@@ -40,11 +40,12 @@ public class ResultListActivity extends ActionBarActivity {
         Worker worker = new Worker();
         worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
         try {
-            //new Worker().execute(intent.getStringExtra("from"), intent.getStringExtra("to"));
             list = worker.get();
 
-            //ListView listview = (ListView) findViewById(R.id.listView);
-            //listview.add
+            ListView listView = (ListView)findViewById(R.id.listView);
+
+            ConnectionAdapter adapter = new ConnectionAdapter(this, list);
+            listView.setAdapter(adapter);
         }
         catch (ExecutionException e) {
             e.printStackTrace();
