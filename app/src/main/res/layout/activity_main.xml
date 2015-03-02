@@ -9,13 +9,13 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="von"
+        android:hint="von"
         android:id="@+id/etFromField" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="nach"
+        android:hint="nach"
         android:id="@+id/etToField"
 
         android:layout_below="@id/etFromField"/>
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:text="Datum"
+        android:hint="Datum"
         android:ems="10"
         android:id="@+id/etDateField"
         android:layout_below="@+id/etToField"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
-        android:text="Zeit"
+        android:hint="Zeit"
         android:ems="10"
         android:id="@+id/etTimeField"
         android:layout_below="@+id/tvSearchDirection"
