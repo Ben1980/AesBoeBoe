@@ -142,7 +142,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -159,7 +159,10 @@
        height="160"
        width="160"
        id="rect4506"
-       style="opacity:0.6;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4512)" />
+       style="opacity:0.6;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4512)"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+       inkscape:export-xdpi="76.753342"
+       inkscape:export-ydpi="76.753342" />
     <rect
        style="fill:#ff1a24;fill-opacity:1"
        id="rect3437"
@@ -200,12 +203,18 @@
        x="97.32888"
        y="724.93732"
        ry="30.16222"
-       rx="30.16222" />
+       rx="30.16222"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+       inkscape:export-xdpi="76.753342"
+       inkscape:export-ydpi="76.753342" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3336-0"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:-15px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(-116.38572,453.1764)"><flowRegion
+       transform="translate(-116.38572,453.1764)"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+       inkscape:export-xdpi="76.753342"
+       inkscape:export-ydpi="76.753342"><flowRegion
          id="flowRegion3338-7"><rect
            id="rect3340-8"
            width="362.85715"
@@ -220,11 +229,17 @@
        inkscape:original="M 127.49023 724.9375 C 110.78036 724.9375 97.328125 738.38974 97.328125 755.09961 L 97.328125 854.77539 C 97.328125 871.48526 110.78036 884.9375 127.49023 884.9375 L 227.16602 884.9375 C 243.87589 884.9375 257.32812 871.48526 257.32812 854.77539 L 257.32812 755.09961 C 257.32813 738.38974 243.87589 724.9375 227.16602 724.9375 L 127.49023 724.9375 z "
        style="fill:none;fill-opacity:1;stroke:url(#radialGradient4442);stroke-opacity:1;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter4494)"
        id="path4434"
-       d="m 127.49023,729.30273 c -14.36686,0 -25.79687,11.43001 -25.79687,25.79688 l 0,99.67578 c 0,14.36687 11.43001,25.79688 25.79687,25.79688 l 99.67579,0 c 14.36686,0 25.79687,-11.43001 25.79687,-25.79688 l 0,-99.67578 c 1e-5,-14.36687 -11.43001,-25.79688 -25.79687,-25.79688 l -99.67579,0 z" />
+       d="m 127.49023,729.30273 c -14.36686,0 -25.79687,11.43001 -25.79687,25.79688 l 0,99.67578 c 0,14.36687 11.43001,25.79688 25.79687,25.79688 l 99.67579,0 c 14.36686,0 25.79687,-11.43001 25.79687,-25.79688 l 0,-99.67578 c 1e-5,-14.36687 -11.43001,-25.79688 -25.79687,-25.79688 l -99.67579,0 z"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+       inkscape:export-xdpi="76.753342"
+       inkscape:export-ydpi="76.753342" />
     <path
        style="opacity:0.6;fill:#ffffff;fill-opacity:0.42125986;stroke:none;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
        d="M 127.49023 -202.42578 C 110.78036 -202.42578 97.328125 -188.97159 97.328125 -172.26172 L 97.328125 -148.95117 A 178.59209 51.791706 0 0 0 180.97266 -142.88867 A 178.59209 51.791706 0 0 0 257.32812 -147.91992 L 257.32812 -172.26172 C 257.32813 -188.97159 243.87589 -202.42578 227.16602 -202.42578 L 127.49023 -202.42578 z "
        transform="translate(0,927.36222)"
-       id="path4516" />
+       id="path4516"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+       inkscape:export-xdpi="76.753342"
+       inkscape:export-ydpi="76.753342" />
   </g>
 </svg>
