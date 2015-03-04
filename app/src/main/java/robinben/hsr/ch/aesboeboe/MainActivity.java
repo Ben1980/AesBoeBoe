@@ -22,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         Button search = (Button) findViewById(R.id.btSearch);
+        Button oppositeDirection = (Button) findViewById(R.id.btOppositeDirection);
         from = (EditText) findViewById(R.id.etFromField);
         to = (EditText) findViewById(R.id.etToField);
         date = (EditText) findViewById(R.id.etDateField);
@@ -31,6 +32,16 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startSearch();
+            }
+        });
+
+        oppositeDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fromTemp = from.getText().toString();
+                from.setText(to.getText().toString());
+                to.setText(fromTemp);
+
             }
         });
 
