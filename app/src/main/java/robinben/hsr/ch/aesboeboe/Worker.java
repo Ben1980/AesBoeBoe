@@ -11,7 +11,6 @@ import ch.schoeb.opendatatransport.model.ConnectionList;
 */
 class Worker extends AsyncTask<String, Integer, ConnectionList> {
     private IOpenTransportRepository connectionSearch;
-    private ConnectionList connectionList;
 
     @Override
     protected void onPreExecute() {
@@ -23,14 +22,13 @@ class Worker extends AsyncTask<String, Integer, ConnectionList> {
     @Override
     protected void onPostExecute(ConnectionList result) {
         super.onPostExecute(result);
-        result = connectionList;
     }
 
     @Override
     protected ConnectionList doInBackground(String... arg) {
-        connectionList = connectionSearch.searchConnections(arg[0], arg[1], null/*via*/, null/*date*/, null/*time*/, false/*isArrivalTime*/);
+        Globals.connectionList = connectionSearch.searchConnections(arg[0], arg[1], null/*via*/, null/*date*/, null/*time*/, false/*isArrivalTime*/);
 
-        return connectionList;
+        return Globals.connectionList;
     }
 
     @Override

@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.concurrent.ExecutionException;
+
+import ch.schoeb.opendatatransport.model.ConnectionList;
+
 
 public class MainActivity extends ActionBarActivity {
     private EditText from;
@@ -41,13 +45,9 @@ public class MainActivity extends ActionBarActivity {
                 String fromTemp = from.getText().toString();
                 from.setText(to.getText().toString());
                 to.setText(fromTemp);
-
             }
         });
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +75,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void startSearch() {
+        getConnections(new Worker());
+
         Intent intent = new Intent(this, ResultListActivity.class);
 
         intent.putExtra("from", from.getText().toString());
@@ -83,5 +85,15 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra("time", time.getText().toString());
 
         startActivity(intent);
+    }
+
+    private void getConnections(Worker worker) {
+        try {
+            worker.execute(from.getText().toString(), to.getText().toString()).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 }
