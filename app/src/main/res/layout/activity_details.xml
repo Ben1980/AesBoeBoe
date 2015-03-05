@@ -6,9 +6,8 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    tools:context="robinben.hsr.ch.aesboeboe.ResultListActivity"
+    tools:context="robinben.hsr.ch.aesboeboe.DetailsActivity"
     android:orientation="vertical">
-
 
     <GridLayout
         android:layout_width="match_parent"
@@ -87,7 +86,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/DetailList"
+        android:id="@+id/detailsView"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.75" />
+
 </LinearLayout>

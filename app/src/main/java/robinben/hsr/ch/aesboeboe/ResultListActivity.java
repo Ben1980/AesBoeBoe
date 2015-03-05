@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +44,13 @@ public class ResultListActivity extends ActionBarActivity {
 
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startDetailsView();
+            }
+        });
     }
 
     @Override
@@ -78,5 +87,13 @@ public class ResultListActivity extends ActionBarActivity {
         }
 
         return new ConnectionList();
+    }
+
+    private void startDetailsView() {
+        Intent intent = new Intent(this, DetailsActivity.class);
+
+
+
+        startActivity(intent);
     }
 }
