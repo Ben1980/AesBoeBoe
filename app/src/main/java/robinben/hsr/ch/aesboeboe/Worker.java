@@ -28,8 +28,7 @@ class Worker extends AsyncTask<String, Integer, ConnectionList> {
 
     @Override
     protected ConnectionList doInBackground(String... arg) {
-
-        connectionList = connectionSearch.searchConnections(arg[0], arg[1]);
+        connectionList = connectionSearch.searchConnections(arg[0], arg[1], null/*via*/, null/*date*/, null/*time*/, null/*isArrivalTime*/);
 
         return connectionList;
     }
