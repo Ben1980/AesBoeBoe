@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
+import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
@@ -47,7 +48,7 @@ public class ResultListActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //String test =  view.get
+                Globals.connection = Globals.connectionList.getConnections().get(position);
 
                 startDetailsView();
             }
@@ -80,6 +81,11 @@ public class ResultListActivity extends ActionBarActivity {
 
     private void startDetailsView() {
         Intent intent = new Intent(this, DetailsActivity.class);
+
+        intent.putExtra("from", tvResultFrom.getText().toString());
+        intent.putExtra("to", tvResultTo.getText().toString());
+        intent.putExtra("date", tvResultDate.getText().toString());
+        intent.putExtra("time", tvResultTime.getText().toString());
 
         startActivity(intent);
     }
