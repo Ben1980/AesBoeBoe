@@ -10,9 +10,9 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.75"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
         android:columnCount="4"
         android:rowCount="2">
 
@@ -84,8 +84,8 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:id="@+id/listView"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.25" />
+        android:layout_weight="0.75" />
 </LinearLayout>

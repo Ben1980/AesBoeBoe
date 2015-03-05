@@ -8,21 +8,37 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:id="@+id/from"
+        android:id="@+id/departure"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
-        android:textSize="24sp"
-        android:layout_weight="0.5"/>
+        android:textSize="20sp"
+        android:layout_weight="0.25"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:id="@+id/to"
-        android:layout_toRightOf="@id/from"
-        android:textSize="24sp"
-        android:layout_weight="0.5"/>
+        android:id="@+id/arrival"
+        android:layout_toRightOf="@id/departure"
+        android:textSize="20sp"
+        android:layout_weight="0.25"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/duration"
+        android:layout_toRightOf="@id/arrival"
+        android:textSize="20sp"
+        android:layout_weight="0.25"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/delay"
+        android:layout_toRightOf="@id/duration"
+        android:textSize="20sp"
+        android:layout_weight="0.25"/>
 
 
 </LinearLayout>
