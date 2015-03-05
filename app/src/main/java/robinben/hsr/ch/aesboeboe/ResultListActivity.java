@@ -48,6 +48,9 @@ public class ResultListActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //String test =  view.get
+
                 startDetailsView();
             }
         });
@@ -91,8 +94,6 @@ public class ResultListActivity extends ActionBarActivity {
 
     private void startDetailsView() {
         Intent intent = new Intent(this, DetailsActivity.class);
-
-
 
         startActivity(intent);
     }
