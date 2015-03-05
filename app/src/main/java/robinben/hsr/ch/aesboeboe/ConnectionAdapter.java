@@ -60,23 +60,19 @@ public class ConnectionAdapter extends BaseAdapter {
         TextView duration = (TextView) convertView.findViewById(R.id.duration);
         TextView delay = (TextView) convertView.findViewById(R.id.delay);
 
-        try {
-            String departureTime = formateTime(connection.getFrom().getDeparture());
-            departure.setText(departureTime);
+        String departureTime = formateDepartureArrivalTime(connection.getFrom().getDeparture());
+        departure.setText(departureTime);
 
-            String arrivalTime = formateTime(connection.getTo().getArrival());
-            arrival.setText(arrivalTime);
+        String arrivalTime = formateDepartureArrivalTime(connection.getTo().getArrival());
+        arrival.setText(arrivalTime);
 
-            //String durationTime = formateTime(connection.getFrom().get());
-            //duration.setText(durationTime);
+        String durationTime = formatDurationtime(connection.getDuration());
+        duration.setText(durationTime);
+
+        //String delayTime = formateTime(connection.getTo().getDelay());
+        //delay.setText(delayTime);
 
 
-            String delayTime = formateTime(connection.getTo().getDelay());
-            delay.setText(delayTime);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         //from.setText();
 
         //TextView to = (TextView) convertView.findViewById(R.id.to);
@@ -86,13 +82,35 @@ public class ConnectionAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private String formateTime(String date) throws ParseException {
-        SimpleDateFormat stringtodate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        SimpleDateFormat totime = new SimpleDateFormat("HH:mm");
+    private String formateDepartureArrivalTime(String dateStr) {
+        Date date = new Date();
 
-        Date date1 = stringtodate.parse(date);
-        String time = totime.format(date1);
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        return time;
+        return new SimpleDateFormat("HH:mm").format(date);
+    }
+
+    private String formatDurationtime(String delayStr) {
+        String[] arr = delayStr.split("[d:]+");
+        int days = Integer.parseInt(arr[0]);
+        int hours = Integer.parseInt(arr[1]);
+        int minutes = Integer.parseInt(arr[2]);
+
+        String delay = new String("");
+        if(days != 0) {
+            delay += String.valueOf(days) + "d, ";
+        }
+        if(hours != 0) {
+            delay += String.valueOf(hours) + "h, ";
+        }
+        if(minutes != 0) {
+            delay += String.valueOf(minutes) + "m";
+        }
+
+        return delay;
     }
 }
