@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/station"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:textSize="20sp"
+        android:layout_weight="0.4"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/arrival"
+        android:layout_toRightOf="@id/station"
+        android:textSize="20sp"
+        android:layout_weight="0.2"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/departure"
+        android:layout_toRightOf="@id/arrival"
+        android:textSize="20sp"
+        android:layout_weight="0.2"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/rail"
+        android:layout_toRightOf="@id/departure"
+        android:textSize="20sp"
+        android:layout_weight="0.2"/>
+
+
+</LinearLayout>
