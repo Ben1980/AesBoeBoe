@@ -8,7 +8,7 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/departure"
         android:layout_alignParentBottom="true"
@@ -17,7 +17,7 @@
         android:layout_weight="0.25"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/arrival"
         android:layout_toRightOf="@id/departure"
@@ -25,7 +25,7 @@
         android:layout_weight="0.25"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/duration"
         android:layout_toRightOf="@id/arrival"
@@ -33,7 +33,7 @@
         android:layout_weight="0.25"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/delay"
         android:layout_toRightOf="@id/duration"

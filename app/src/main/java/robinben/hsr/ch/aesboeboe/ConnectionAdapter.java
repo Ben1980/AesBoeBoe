@@ -69,29 +69,20 @@ public class ConnectionAdapter extends BaseAdapter {
         String durationTime = formatDurationtime(connection.getDuration());
         duration.setText(durationTime);
 
-        //String delayTime = formateTime(connection.getTo().getDelay());
-        //delay.setText(delayTime);
-
-
-        //from.setText();
-
-        //TextView to = (TextView) convertView.findViewById(R.id.to);
-        //ConnectionStation toStation = connection.getTo();
-        //to.setText(toStation.getStation().getName());
+        int delayTime = Integer.parseInt(connection.getTo().getDelay());
+        delay.setText(String.valueOf(delayTime));
 
         return convertView;
     }
 
     private String formateDepartureArrivalTime(String dateStr) {
-        Date date = new Date();
-
         try {
-            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr);
+            return new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return new SimpleDateFormat("HH:mm").format(date);
+        return new String();
     }
 
     private String formatDurationtime(String delayStr) {

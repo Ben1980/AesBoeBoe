@@ -37,22 +37,11 @@ public class ResultListActivity extends ActionBarActivity {
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
 
-        Worker worker = new Worker();
-        worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to"));
-        try {
-            list = worker.get();
+        list = getConnections(intent, new Worker());
+        ConnectionAdapter adapter = new ConnectionAdapter(this, list);
 
-            ListView listView = (ListView)findViewById(R.id.listView);
-
-            ConnectionAdapter adapter = new ConnectionAdapter(this, list);
-            listView.setAdapter(adapter);
-        }
-        catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ListView listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -75,5 +64,17 @@ public class ResultListActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private ConnectionList getConnections(Intent intent, Worker worker) {
+        try {
+            return worker.execute(intent.getStringExtra("from"),intent.getStringExtra("to")).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return new ConnectionList();
     }
 }
