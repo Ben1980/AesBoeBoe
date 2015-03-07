@@ -84,8 +84,6 @@ public class ResultListActivity extends ActionBarActivity {
 
         intent.putExtra("from", tvResultFrom.getText().toString());
         intent.putExtra("to", tvResultTo.getText().toString());
-        intent.putExtra("date", tvResultDate.getText().toString());
-        intent.putExtra("time", tvResultTime.getText().toString());
 
         startActivity(intent);
     }

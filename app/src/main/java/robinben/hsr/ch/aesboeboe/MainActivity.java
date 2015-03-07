@@ -89,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void getConnections(Worker worker) {
         try {
-            worker.execute(from.getText().toString(), to.getText().toString()).get();
+            worker.execute(from.getText().toString(), to.getText().toString(), null, null, null, false).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

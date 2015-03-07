@@ -9,7 +9,7 @@ import ch.schoeb.opendatatransport.model.ConnectionList;
 /**
 * Created by Ben on 01.03.15.
 */
-class Worker extends AsyncTask<String, Integer, ConnectionList> {
+class Worker extends AsyncTask<Object, Integer, ConnectionList> {
     private IOpenTransportRepository connectionSearch;
 
     @Override
@@ -25,8 +25,8 @@ class Worker extends AsyncTask<String, Integer, ConnectionList> {
     }
 
     @Override
-    protected ConnectionList doInBackground(String... arg) {
-        Globals.connectionList = connectionSearch.searchConnections(arg[0], arg[1], null/*via*/, null/*date*/, null/*time*/, false/*isArrivalTime*/);
+    protected ConnectionList doInBackground(Object... arg) {
+        Globals.connectionList = connectionSearch.searchConnections((String)arg[0]/*from*/, (String)arg[1]/*to*/, (String)arg[2]/*via*/, (String)arg[3]/*date*/, (String)arg[4]/*time*/, (boolean)arg[5]/*isArrivalTime*/);
 
         return Globals.connectionList;
     }
