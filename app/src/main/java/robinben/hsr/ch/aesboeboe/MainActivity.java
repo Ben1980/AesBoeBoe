@@ -16,6 +16,7 @@ import ch.schoeb.opendatatransport.model.ConnectionList;
 
 public class MainActivity extends ActionBarActivity {
     private EditText from;
+    private EditText via;
     private EditText to;
     private EditText date;
     private EditText time;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
         Button search = (Button) findViewById(R.id.btSearch);
         Button oppositeDirection = (Button) findViewById(R.id.btOppositeDirection);
         from = (EditText) findViewById(R.id.etFromField);
+        via = (EditText) findViewById(R.id.etViaField);
         to = (EditText) findViewById(R.id.etToField);
         date = (EditText) findViewById(R.id.etDateField);
         time = (EditText) findViewById(R.id.etTimeField);
@@ -89,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void getConnections(Worker worker) {
         try {
-            worker.execute(from.getText().toString(), to.getText().toString(), null, null, null, false).get();
+            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), date.getText().toString(), time.getText().toString(), false).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
