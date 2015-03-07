@@ -7,17 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionList;
-import ch.schoeb.opendatatransport.model.ConnectionStation;
-import ch.schoeb.opendatatransport.model.Station;
 
 /**
  * Created by Ben on 01.03.15.
