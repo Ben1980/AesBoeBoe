@@ -1,9 +1,11 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import ch.schoeb.opendatatransport.model.Connection;
 
@@ -13,6 +15,7 @@ import ch.schoeb.opendatatransport.model.Connection;
 public class DetailsAdapter extends BaseAdapter {
     private Context context;
     private Connection connection;
+    //private List
 
     public DetailsAdapter(Context context, Connection connection) {
         this.context = context;
@@ -21,12 +24,14 @@ public class DetailsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        //connection.
+
         return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return connection;
     }
 
     @Override
