@@ -1,20 +1,35 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class DetailsActivity extends ActionBarActivity {
+    private TextView tvResultFrom;
+    private TextView tvResultTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        tvResultFrom = (TextView) findViewById(R.id.tvResultFrom);
+        tvResultTo = (TextView) findViewById(R.id.tvResultTo);
 
+        Intent intent = getIntent();
+
+        tvResultFrom.setText(intent.getStringExtra("from"));
+        tvResultTo.setText(intent.getStringExtra("to"));
+
+        DetailsAdapter adapter = new DetailsAdapter(this, Globals.connection);
+
+        ListView listView = (ListView)findViewById(R.id.detailsView);
+        listView.setAdapter(adapter);
     }
 
 

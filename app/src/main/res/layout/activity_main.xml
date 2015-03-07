@@ -15,56 +15,77 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="nach"
-        android:id="@+id/etToField"
-
+        android:hint="über"
+        android:id="@+id/etViaField"
         android:layout_below="@id/etFromField"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Abfahrt"
-        android:id="@+id/tvSearchDirection"
-        android:layout_below="@+id/etDateField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
-        android:hint="Datum"
-        android:ems="10"
-        android:id="@+id/etDateField"
-        android:layout_below="@+id/etToField"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:hint="nach"
+        android:id="@+id/etToField"
+        android:layout_below="@id/etViaField"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:hint="Zeit"
-        android:ems="10"
-        android:id="@+id/etTimeField"
-        android:layout_below="@+id/tvSearchDirection"
-        android:layout_alignRight="@+id/etToField"
-        android:layout_alignEnd="@+id/etToField" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:id="@+id/directionLayout"
+        android:layout_below="@+id/etToField">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Abfahrt"
+            android:id="@+id/tvSearchDirection"
+            android:layout_below="@+id/etDateField"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingTop="20dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:hint="Datum"
+                android:ems="10"
+                android:id="@+id/etDateField"
+                android:layout_below="@+id/etToField"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:hint="Zeit"
+                android:ems="10"
+                android:id="@+id/etTimeField"
+                android:layout_below="@+id/tvSearchDirection"
+                android:layout_alignRight="@+id/etToField"
+                android:layout_alignEnd="@+id/etToField" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Suchen"
         android:id="@+id/btSearch"
+        android:layout_below="@+id/directionLayout"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/etTimeField"
-        android:layout_alignEnd="@+id/etTimeField"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Richtungswechel"
         android:id="@+id/btOppositeDirection"
