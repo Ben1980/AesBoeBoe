@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,20 +60,26 @@ public class DetailsAdapter extends BaseAdapter {
         TextView departure = (TextView) convertView.findViewById(R.id.departure);
         TextView rail = (TextView) convertView.findViewById(R.id.rail);
 
-        
+        station.setText(section.getDeparture().getStation().getName());
 
-        //String departureTime = formateDepartureArrivalTime(connection.getFrom().getDeparture());
-        //departure.setText(departureTime);
+        String arrivalTime = formateDepartureArrivalTime(section.getArrival().getArrival());
+        arrival.setText(arrivalTime);
 
-        //String arrivalTime = formateDepartureArrivalTime(connection.getTo().getArrival());
-        //arrival.setText(arrivalTime);
+        String departureTime = formateDepartureArrivalTime(section.getDeparture().getDeparture());
+        departure.setText(departureTime);
 
-        //String durationTime = formatDurationtime(connection.getDuration());
-        //duration.setText(durationTime);
-
-        //int delayTime = Integer.parseInt(connection.getTo().getDelay());
-        //delay.setText(String.valueOf(delayTime));
+        rail.setText(section.getDeparture().getPlatform());
 
         return convertView;
+    }
+
+    private String formateDepartureArrivalTime(String dateStr) {
+        try {
+            return new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new String();
     }
 }
