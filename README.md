@@ -15,15 +15,17 @@ Features:
     - App-Icon ist gesetzt
     - „Umgekehrte Richtung“ – Einfache Möglichkeit Von und Nach zu vertauschen. z.B. ein Button
     - opendatatransport getDelay gibt bei Zügen ohne Verspähtung "0" zurück anstatt null
+    - Anzeigen von Verspätungen
+    - Detailscreen
+    - Suche der Verbindung zu einem spezifischen Zeitpunkt
 
 ##ToDo:
 
 Ben
 ---
- - Detailscreen
    - Anzeigen der Verkehrsmittel
    - Anzeigen der Klasse
-   - Anzeigen von Verspätungen
+   
 
 Robin
 -----
