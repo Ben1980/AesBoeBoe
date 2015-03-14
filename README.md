@@ -18,6 +18,7 @@ Features:
     - Anzeigen von Verspätungen
     - Detailscreen
     - Suche der Verbindung zu einem spezifischen Zeitpunkt
+	- mit Next springt der Cursor zum nächsten Input feld
 
 ##ToDo:
 
