@@ -1,15 +1,16 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -30,9 +31,16 @@ public class MainActivity extends ActionBarActivity {
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -59,6 +67,7 @@ public class MainActivity extends ActionBarActivity {
         search.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Globals.searchDialog.show();
                 startSearch();
             }
         });
@@ -72,6 +81,16 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+        Globals.searchDialog = new Dialog(this);
+
+       // Globals.searchDialog.setContentView(R.layout.busy_dialog);
+        Globals.searchDialog.setTitle("suche Verbindungen....");
+        Globals.searchDialog.setCanceledOnTouchOutside(false);
+
+
+
+        setProgressBarIndeterminateVisibility(true);
 
         from.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,6 +162,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void startSearch() {
+
+
         getConnections(new Worker());
 
         Intent intent = new Intent(this, ResultListActivity.class);
@@ -154,9 +175,12 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
         startActivity(intent);
+
+
     }
 
     private void getConnections(Worker worker) {
+
         try {
             worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), date.getText().toString(), time.getText().toString(),isArrivalTime.isChecked()).get();
         } catch (InterruptedException e) {
@@ -164,6 +188,7 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
     }
 
     private void checkAutoCompleteList(CharSequence s, int before, int count, AutoCompleteTextView view) {
@@ -181,6 +206,7 @@ public class MainActivity extends ActionBarActivity {
     private String[] lookupStationNames(CharSequence s) {
 
 
+
         try {
             WorkerAutoComplete workerAutoComplete = new WorkerAutoComplete();
             return workerAutoComplete.execute(s.toString()).get();
@@ -190,7 +216,11 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         };
+
+
         return new String[0];
+
+
 
     };
 }
