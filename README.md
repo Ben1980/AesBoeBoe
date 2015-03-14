@@ -34,4 +34,10 @@ Robin
  - Spätere Verbindungen anzeigen für gesuchte Verbindung
  - Während der Suche wird dem User angezeigt, dass etwas passiert. z.B. ein „Bitte Warten“-Dialog oder ein einfacher Indicator.
   
+Neu:
+Date und Time picker
 
+  
+  
+  
+  
