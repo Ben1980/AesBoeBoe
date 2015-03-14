@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 public class ResultListActivity extends ActionBarActivity {
@@ -16,6 +17,7 @@ public class ResultListActivity extends ActionBarActivity {
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
+    private ToggleButton isArrivalTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
