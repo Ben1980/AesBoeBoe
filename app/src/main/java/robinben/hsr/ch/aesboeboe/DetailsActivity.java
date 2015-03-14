@@ -30,6 +30,8 @@ public class DetailsActivity extends ActionBarActivity {
 
         ListView listView = (ListView)findViewById(R.id.detailsView);
         listView.setAdapter(adapter);
+        Globals.searchDialog.dismiss();
+        
     }
 
 
