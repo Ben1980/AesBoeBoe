@@ -103,4 +103,14 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="32dp" />
 
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="Ab"
+        android:textOn="An"
+        android:id="@+id/btIsArrivalTime"
+        android:layout_below="@+id/btOppositeDirection"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

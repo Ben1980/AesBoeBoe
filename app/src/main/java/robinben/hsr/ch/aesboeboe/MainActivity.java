@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 import java.util.concurrent.ExecutionException;
 
@@ -27,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
     private String[] stationNameList = new String[]{};
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
+    private ToggleButton isArrivalTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
         to = (AutoCompleteTextView) findViewById(R.id.etToField);
         date = (EditText) findViewById(R.id.etDateField);
         time = (EditText) findViewById(R.id.etTimeField);
+        isArrivalTime = (ToggleButton) findViewById(R.id.btIsArrivalTime);
 
         stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
         from.setAdapter(stationListAdapter);
@@ -148,13 +151,14 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra("to", to.getText().toString());
         intent.putExtra("date", date.getText().toString());
         intent.putExtra("time", time.getText().toString());
+        intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
         startActivity(intent);
     }
 
     private void getConnections(Worker worker) {
         try {
-            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), date.getText().toString(), time.getText().toString(), false).get();
+            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), date.getText().toString(), time.getText().toString(),isArrivalTime.isChecked()).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -164,8 +168,6 @@ public class MainActivity extends ActionBarActivity {
 
     private void checkAutoCompleteList(CharSequence s, int before, int count, AutoCompleteTextView view) {
         if (count > before){
-
-
             if(s.length() == 3){
                 stationNameList = lookupStationNames(s);
                 stationListAdapter = new ArrayAdapter(mainActivityContext,android.R.layout.simple_list_item_1,stationNameList);
