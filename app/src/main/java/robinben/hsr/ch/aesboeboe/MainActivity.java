@@ -185,8 +185,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private String[] lookupStationNames(CharSequence s) {
-
-
         try {
             WorkerAutoComplete workerAutoComplete = new WorkerAutoComplete();
             return workerAutoComplete.execute(s.toString()).get();
