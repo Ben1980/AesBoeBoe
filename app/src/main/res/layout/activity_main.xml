@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:hint="von"
         android:id="@+id/etFromField"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:imeOptions="actionNext"/>
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
         android:hint="über"
         android:id="@+id/etViaField"
         android:layout_below="@id/etFromField"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:imeOptions="actionNext"/>
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
@@ -27,7 +29,8 @@
         android:hint="nach"
         android:id="@+id/etToField"
         android:layout_below="@id/etViaField"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:imeOptions="actionNext"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -45,7 +48,8 @@
             android:layout_below="@+id/etDateField"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            android:imeOptions="actionNext"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -61,7 +65,8 @@
                 android:id="@+id/etDateField"
                 android:layout_below="@+id/etToField"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:imeOptions="actionNext"/>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -72,7 +77,8 @@
                 android:id="@+id/etTimeField"
                 android:layout_below="@+id/tvSearchDirection"
                 android:layout_alignRight="@+id/etToField"
-                android:layout_alignEnd="@+id/etToField" />
+                android:layout_alignEnd="@+id/etToField"
+                android:imeOptions="actionNext"/>
         </LinearLayout>
 
     </LinearLayout>
