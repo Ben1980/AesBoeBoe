@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import java.util.concurrent.ExecutionException;
@@ -23,8 +26,8 @@ public class MainActivity extends ActionBarActivity {
     private AutoCompleteTextView from;
     private AutoCompleteTextView via;
     private AutoCompleteTextView to;
-    private EditText date;
-    private EditText time;
+    private DatePicker date;
+    private TimePicker time;
     private String[] stationNameList = new String[]{};
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
@@ -38,14 +41,17 @@ public class MainActivity extends ActionBarActivity {
 
         mainActivityContext = this;
 
-        Button search = (Button) findViewById(R.id.btSearch);
-        Button oppositeDirection = (Button) findViewById(R.id.btOppositeDirection);
+        ImageButton search = (ImageButton) findViewById(R.id.btSearch);
+        ImageButton oppositeDirection = (ImageButton) findViewById(R.id.btOppositeDirection);
         from = (AutoCompleteTextView) findViewById(R.id.etFromField);
         via = (AutoCompleteTextView) findViewById(R.id.etViaField);
         to = (AutoCompleteTextView) findViewById(R.id.etToField);
-        date = (EditText) findViewById(R.id.etDateField);
-        time = (EditText) findViewById(R.id.etTimeField);
+        date = (DatePicker) findViewById(R.id.datePicker);
+        time = (TimePicker) findViewById(R.id.timePicker);
+        time.setIs24HourView(true);
         isArrivalTime = (ToggleButton) findViewById(R.id.btIsArrivalTime);
+        isArrivalTime.setTextOff("Abfahrt");
+        isArrivalTime.setTextOn("Ankunft");
 
         stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
         from.setAdapter(stationListAdapter);
@@ -149,8 +155,8 @@ public class MainActivity extends ActionBarActivity {
 
         intent.putExtra("from", from.getText().toString());
         intent.putExtra("to", to.getText().toString());
-        intent.putExtra("date", date.getText().toString());
-        intent.putExtra("time", time.getText().toString());
+        intent.putExtra("date", new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()));
+        intent.putExtra("time", new String(time.getCurrentHour() + ":" + time.getCurrentMinute()));
         intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
         startActivity(intent);
@@ -158,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void getConnections(Worker worker) {
         try {
-            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), date.getText().toString(), time.getText().toString(),isArrivalTime.isChecked()).get();
+            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()), new String(time.getCurrentHour() + ":" + time.getCurrentMinute()), isArrivalTime.isChecked()).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

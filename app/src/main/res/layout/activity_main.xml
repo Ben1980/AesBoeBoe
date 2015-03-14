@@ -1,51 +1,115 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:id="@+id/Main">
-
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="von"
-        android:id="@+id/etFromField"
-        android:singleLine="true"
-        android:imeOptions="actionNext"/>
-
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="über"
-        android:id="@+id/etViaField"
-        android:layout_below="@id/etFromField"
-        android:singleLine="true"
-        android:imeOptions="actionNext"/>
-
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="nach"
-        android:id="@+id/etToField"
-        android:layout_below="@id/etViaField"
-        android:singleLine="true"
-        android:imeOptions="actionNext"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".MainActivity"
+    android:id="@+id/Main"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.30"
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:id="@+id/directionLayout"
-        android:layout_below="@+id/etToField">
+        android:gravity="top">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.20"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btSearch"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_search"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btOppositeDirection"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_refresh"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.80"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="von"
+                android:id="@+id/etFromField"
+                android:singleLine="true"
+                android:imeOptions="actionNext"/>
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="nach"
+                android:id="@+id/etToField"
+                android:layout_below="@id/etFromField"
+                android:singleLine="true"
+                android:imeOptions="actionNext"/>
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="über"
+                android:id="@+id/etViaField"
+                android:layout_below="@id/etToField"
+                android:singleLine="true"
+                android:imeOptions="actionNext"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.70"
+        android:orientation="vertical"
+        android:gravity="top">
+        <ToggleButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOff="Abfahrt"
+            android:id="@+id/btIsArrivalTime"
+            android:checked="false" />
+        <DatePicker
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:id="@+id/datePicker"
+            android:layout_gravity="center_horizontal"
+            android:spinnersShown="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+        <TimePicker
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:id="@+id/timePicker"
+            android:layout_gravity="center_horizontal"
+            android:timePickerMode="spinner"/>
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Abfahrt"
             android:id="@+id/tvSearchDirection"
-            android:layout_below="@+id/etDateField"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:paddingTop="20dp"
@@ -53,8 +117,9 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="0dp"
+            android:layout_weight="0.20"
+            android:layout_height="match_parent">
 
             <EditText
                 android:layout_width="wrap_content"
@@ -80,28 +145,9 @@
                 android:layout_alignEnd="@+id/etToField"
                 android:imeOptions="actionNext"/>
         </LinearLayout>
-
     </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Suchen"
-        android:id="@+id/btSearch"
-        android:layout_below="@+id/directionLayout"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Richtungswechel"
-        android:id="@+id/btOppositeDirection"
-        android:layout_below="@+id/btSearch"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="32dp" />
 
     <ToggleButton
         android:layout_width="wrap_content"
@@ -111,6 +157,8 @@
         android:id="@+id/btIsArrivalTime"
         android:layout_below="@+id/btOppositeDirection"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />-->
 
-</RelativeLayout>
+
+
+</LinearLayout>
