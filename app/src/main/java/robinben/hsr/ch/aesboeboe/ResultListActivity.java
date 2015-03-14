@@ -17,7 +17,8 @@ public class ResultListActivity extends ActionBarActivity {
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
-    private ToggleButton isArrivalTime;
+    private boolean isArrivalTime;
+    private TextView tvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,16 @@ public class ResultListActivity extends ActionBarActivity {
         tvResultTo = (TextView) findViewById(R.id.tvResultTo);
         tvResultDate = (TextView) findViewById(R.id.tvResultDate);
         tvResultTime = (TextView) findViewById(R.id.tvResultTime);
+        tvTime = (TextView) findViewById(R.id.tvTime);
 
         Intent intent = getIntent();
 
+        isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
         tvResultFrom.setText(intent.getStringExtra("from"));
         tvResultTo.setText(intent.getStringExtra("to"));
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
+        selectArrivalDepartureLabel();
 
         ConnectionAdapter adapter = new ConnectionAdapter(this, Globals.connectionList);
 
@@ -84,4 +88,12 @@ public class ResultListActivity extends ActionBarActivity {
 
         startActivity(intent);
     }
-}
+
+    private void selectArrivalDepartureLabel () {
+
+        if (isArrivalTime) {
+            tvTime.setText(R.string.timeIsArrival);
+        } else
+            tvTime.setText(R.string.timeIsDeparture);
+    }
+};
