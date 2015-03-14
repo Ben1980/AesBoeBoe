@@ -155,7 +155,7 @@ public class MainActivity extends ActionBarActivity {
 
         intent.putExtra("from", from.getText().toString());
         intent.putExtra("to", to.getText().toString());
-        intent.putExtra("date", new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()));
+        intent.putExtra("date", new String(date.getDayOfMonth() + "." + date.getMonth()+1 + "." + date.getYear()));
         intent.putExtra("time", new String(time.getCurrentHour() + ":" + time.getCurrentMinute()));
         intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void getConnections(Worker worker) {
         try {
-            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()), new String(time.getCurrentHour() + ":" + time.getCurrentMinute()), isArrivalTime.isChecked()).get();
+            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), new String(date.getDayOfMonth() + "." + date.getMonth()+1 + "." + date.getYear()), new String(time.getCurrentHour() + ":" + time.getCurrentMinute()), isArrivalTime.isChecked()).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

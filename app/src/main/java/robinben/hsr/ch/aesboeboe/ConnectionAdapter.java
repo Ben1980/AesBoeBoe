@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ch.schoeb.opendatatransport.model.Connection;
@@ -71,8 +72,13 @@ public class ConnectionAdapter extends BaseAdapter {
     }
 
     private String formateDepartureArrivalTime(String dateStr) {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        SimpleDateFormat format2 = new SimpleDateFormat("HH:mm");
+
         try {
-            return new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr));
+            Date date = format1.parse(dateStr);
+            String test = format2.format(date);
+            return test;
         } catch (ParseException e) {
             e.printStackTrace();
         }
