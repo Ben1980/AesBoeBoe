@@ -1,11 +1,17 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -13,24 +19,39 @@ import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
-    private EditText from;
-    private EditText via;
-    private EditText to;
+    private AutoCompleteTextView from;
+    private AutoCompleteTextView via;
+    private AutoCompleteTextView to;
     private EditText date;
     private EditText time;
+    private String[] stationNameList = new String[]{};
+    private ArrayAdapter stationListAdapter;
+    private Context mainActivityContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        mainActivityContext = this;
+
         Button search = (Button) findViewById(R.id.btSearch);
         Button oppositeDirection = (Button) findViewById(R.id.btOppositeDirection);
-        from = (EditText) findViewById(R.id.etFromField);
-        via = (EditText) findViewById(R.id.etViaField);
-        to = (EditText) findViewById(R.id.etToField);
+        from = (AutoCompleteTextView) findViewById(R.id.etFromField);
+        via = (AutoCompleteTextView) findViewById(R.id.etViaField);
+        to = (AutoCompleteTextView) findViewById(R.id.etToField);
         date = (EditText) findViewById(R.id.etDateField);
         time = (EditText) findViewById(R.id.etTimeField);
+
+        stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
+        from.setAdapter(stationListAdapter);
+
+        stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
+        to.setAdapter(stationListAdapter);
+
+        stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
+        via.setAdapter(stationListAdapter);
 
         search.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -45,6 +66,50 @@ public class MainActivity extends ActionBarActivity {
                 String fromTemp = from.getText().toString();
                 from.setText(to.getText().toString());
                 to.setText(fromTemp);
+            }
+        });
+
+
+        from.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkAutoCompleteList(s, before, count, from);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        to.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkAutoCompleteList(s, before, count, to);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        via.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkAutoCompleteList(s, before, count, via);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }
@@ -96,4 +161,34 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         }
     }
+
+    private void checkAutoCompleteList(CharSequence s, int before, int count, AutoCompleteTextView view) {
+        if (count > before){
+
+
+            if(s.length() == 3){
+                stationNameList = lookupStationNames(s);
+                stationListAdapter = new ArrayAdapter(mainActivityContext,android.R.layout.simple_list_item_1,stationNameList);
+                view.setAdapter(stationListAdapter);
+
+            }
+
+        }
+    }
+
+    private String[] lookupStationNames(CharSequence s) {
+
+
+        try {
+            WorkerAutoComplete workerAutoComplete = new WorkerAutoComplete();
+            return workerAutoComplete.execute(s.toString()).get();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        };
+        return new String[0];
+
+    };
 }
