@@ -79,7 +79,7 @@ public class OnlineOpenTransportRepository implements IOpenTransportRepository {
             }
 
             if (isArrivalTime) {
-                url += "&url=1";
+                url += "&isArrivalTime=1";
             }
 
         } catch (UnsupportedEncodingException e) {
