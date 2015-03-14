@@ -19,6 +19,7 @@ Features:
     - Detailscreen
     - Suche der Verbindung zu einem spezifischen Zeitpunkt
 	- mit Next springt der Cursor zum nächsten Input feld
+	- Angabe ob gewählte Zeitpunkt die Ankunfts- oder Abfahrts-Zeit ist
 
 ##ToDo:
 
@@ -30,7 +31,7 @@ Ben
 
 Robin
 -----
- - Angabe ob gewählte Zeitpunkt die Ankunfts- oder Abfahrts-Zeit ist
+ - 
  - Spätere Verbindungen anzeigen für gesuchte Verbindung
  - Während der Suche wird dem User angezeigt, dass etwas passiert. z.B. ein „Bitte Warten“-Dialog oder ein einfacher Indicator.
   
