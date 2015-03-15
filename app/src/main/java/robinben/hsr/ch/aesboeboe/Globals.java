@@ -1,5 +1,7 @@
 package robinben.hsr.ch.aesboeboe;
 
+
+import android.app.DialogFragment;
 import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionList;
 
@@ -9,4 +11,6 @@ import ch.schoeb.opendatatransport.model.ConnectionList;
 public class Globals {
     static public ConnectionList connectionList = new ConnectionList();
     static public Connection connection = new Connection();
+    static public DialogFragment searchBusyFragment;
+
 }

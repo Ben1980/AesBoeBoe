@@ -1,5 +1,6 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +19,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
-
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  {
     private AutoCompleteTextView from;
     private AutoCompleteTextView via;
     private AutoCompleteTextView to;
@@ -32,13 +32,14 @@ public class MainActivity extends ActionBarActivity {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
+    private FragmentTransaction fragmentTransaction;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         mainActivityContext = this;
 
         ImageButton search = (ImageButton) findViewById(R.id.btSearch);
@@ -62,9 +63,15 @@ public class MainActivity extends ActionBarActivity {
         stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
         via.setAdapter(stationListAdapter);
 
+
+
         search.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                Globals.searchBusyFragment = searchBusyFragment.newInstance();
+                Globals.searchBusyFragment.show(fragmentTransaction, "searchBusyFragment");
                 startSearch();
             }
         });
@@ -75,7 +82,8 @@ public class MainActivity extends ActionBarActivity {
                 String fromTemp = from.getText().toString();
                 from.setText(to.getText().toString());
                 to.setText(fromTemp);
-            }
+
+            };
         });
 
 
@@ -149,6 +157,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void startSearch() {
+
+
         getConnections(new Worker());
 
         Intent intent = new Intent(this, ResultListActivity.class);
@@ -160,9 +170,12 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
         startActivity(intent);
+
+
     }
 
     private void getConnections(Worker worker) {
+
         try {
             worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()), new String(time.getCurrentHour() + ":" + time.getCurrentMinute()), isArrivalTime.isChecked()).get();
         } catch (InterruptedException e) {
@@ -170,6 +183,7 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
     }
 
     private void checkAutoCompleteList(CharSequence s, int before, int count, AutoCompleteTextView view) {
@@ -194,7 +208,11 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         };
+
+
         return new String[0];
+
+
 
     };
 }
