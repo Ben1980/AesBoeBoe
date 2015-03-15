@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="von"
+        android:text="Bubikon"
         android:id="@+id/etFromField"
         android:singleLine="true"
         android:imeOptions="actionNext"/>
@@ -27,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="nach"
+        android:text="Zürich"
         android:id="@+id/etToField"
         android:layout_below="@id/etViaField"
         android:singleLine="true"
