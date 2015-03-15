@@ -33,6 +33,9 @@ public class WorkerAutoComplete extends AsyncTask<String, Integer, String[]> {
     protected String[] doInBackground(String... arg) {
 
         stationObjectList = connectionSearch.findStations(arg[0]);
+        if (stationObjectList == null){
+            return new String[0];
+        }
 
         stationNameList = new String[stationObjectList.getStations().size()];
 
