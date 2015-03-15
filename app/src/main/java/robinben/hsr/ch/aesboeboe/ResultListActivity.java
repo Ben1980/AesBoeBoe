@@ -1,5 +1,8 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +22,7 @@ public class ResultListActivity extends ActionBarActivity {
     private TextView tvResultTime;
     private boolean isArrivalTime;
     private TextView tvTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class ResultListActivity extends ActionBarActivity {
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+        Globals.searchBusyFragment.dismiss();
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

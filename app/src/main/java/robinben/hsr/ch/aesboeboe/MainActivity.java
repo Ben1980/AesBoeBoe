@@ -1,26 +1,25 @@
 package robinben.hsr.ch.aesboeboe;
 
-import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
-
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  {
     private AutoCompleteTextView from;
     private AutoCompleteTextView via;
     private AutoCompleteTextView to;
@@ -30,20 +29,14 @@ public class MainActivity extends ActionBarActivity {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
+    private FragmentTransaction fragmentTransaction;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
-
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_main);
-
-
         mainActivityContext = this;
 
         Button search = (Button) findViewById(R.id.btSearch);
@@ -64,10 +57,15 @@ public class MainActivity extends ActionBarActivity {
         stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
         via.setAdapter(stationListAdapter);
 
+
+
         search.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Globals.searchDialog.show();
+
+                fragmentTransaction = getFragmentManager().beginTransaction();
+                Globals.searchBusyFragment = searchBusyFragment.newInstance();
+                Globals.searchBusyFragment.show(fragmentTransaction, "searchBusyFragment");
                 startSearch();
             }
         });
@@ -78,19 +76,10 @@ public class MainActivity extends ActionBarActivity {
                 String fromTemp = from.getText().toString();
                 from.setText(to.getText().toString());
                 to.setText(fromTemp);
-            }
+
+            };
         });
 
-
-        Globals.searchDialog = new Dialog(this);
-
-       // Globals.searchDialog.setContentView(R.layout.busy_dialog);
-        Globals.searchDialog.setTitle("suche Verbindungen....");
-        Globals.searchDialog.setCanceledOnTouchOutside(false);
-
-
-
-        setProgressBarIndeterminateVisibility(true);
 
         from.addTextChangedListener(new TextWatcher() {
             @Override
