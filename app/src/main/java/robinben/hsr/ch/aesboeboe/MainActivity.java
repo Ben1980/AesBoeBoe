@@ -54,13 +54,13 @@ public class MainActivity extends ActionBarActivity  {
         isArrivalTime.setTextOff("Abfahrt");
         isArrivalTime.setTextOn("Ankunft");
 
-        stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
+        stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         from.setAdapter(stationListAdapter);
 
-        stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
+        stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         to.setAdapter(stationListAdapter);
 
-        stationListAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,stationNameList);
+        stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         via.setAdapter(stationListAdapter);
 
 
@@ -190,7 +190,7 @@ public class MainActivity extends ActionBarActivity  {
         if (count > before){
             if(s.length() == 3){
                 stationNameList = lookupStationNames(s);
-                stationListAdapter = new ArrayAdapter(mainActivityContext,android.R.layout.simple_list_item_1,stationNameList);
+                stationListAdapter = new ArrayAdapter<>(mainActivityContext,android.R.layout.simple_list_item_1,stationNameList);
                 view.setAdapter(stationListAdapter);
 
             }
