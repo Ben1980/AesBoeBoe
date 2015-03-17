@@ -6,56 +6,152 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    tools:context="robinben.hsr.ch.aesboeboe.DetailsActivity"
+    tools:context="robinben.hsr.ch.aesboeboe.DetailsView"
     android:orientation="vertical">
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_gravity="center_horizontal"
         android:layout_height="0dp"
-        android:layout_weight="0.25"
-        android:columnCount="2"
-        android:rowCount="2">
+        android:layout_weight="0.10"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.50"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="von:"
+                android:id="@+id/tvFrom"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.40"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="resultFrom"
+                android:id="@+id/tvResultFrom"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.20"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Datum:"
+                android:id="@+id/tvDate"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="00.00.0000"
+                android:id="@+id/tvResultDate"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.50"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="nach:"
+                android:id="@+id/tvTo"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.40"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="resultTo"
+                android:id="@+id/tvResultTo"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.20"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Zeit (ab):"
+                android:id="@+id/tvTime"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="resultTime"
+                android:id="@+id/tvResultTime"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="von:"
-            android:id="@+id/tvFrom"
-            android:layout_row="0"
-            android:layout_column="0" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/station"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:textSize="12sp"
+            android:layout_weight="0.4"
+            android:text="Station"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textStyle="bold"/>
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="resultFrom"
-            android:id="@+id/tvResultFrom"
-            android:layout_row="0"
-            android:layout_column="1" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/arrival"
+            android:layout_toRightOf="@id/station"
+            android:textSize="12sp"
+            android:layout_weight="0.2"
+            android:text="Ankunft"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textStyle="bold"/>
         <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="nach:"
-            android:id="@+id/tvTo"
-            android:layout_row="1"
-            android:layout_column="0" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/departure"
+            android:layout_toRightOf="@id/arrival"
+            android:textSize="12sp"
+            android:layout_weight="0.2"
+            android:text="Abfahrt"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textStyle="bold"/>
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="resultTo"
-            android:id="@+id/tvResultTo"
-            android:layout_row="1"
-            android:layout_column="1" />
-    </GridLayout>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rail"
+            android:layout_toRightOf="@id/departure"
+            android:textSize="12sp"
+            android:layout_weight="0.2"
+            android:text="Gleis"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/detailsView"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.75" />
+        android:layout_weight="0.85" />
 
 </LinearLayout>
