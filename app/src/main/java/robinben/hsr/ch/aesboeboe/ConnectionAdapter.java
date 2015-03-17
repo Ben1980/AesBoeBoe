@@ -66,7 +66,9 @@ public class ConnectionAdapter extends BaseAdapter {
         duration.setText(durationTime);
 
         int delayTime = Integer.parseInt(connection.getTo().getDelay());
-        delay.setText(String.valueOf(delayTime));
+        if(delayTime > 0) {
+            delay.setText(String.valueOf(delayTime) + "m");
+        }
 
         return convertView;
     }
