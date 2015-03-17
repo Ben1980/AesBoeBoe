@@ -122,9 +122,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.5197085"
-     inkscape:cx="184.38714"
-     inkscape:cy="256.97643"
+     inkscape:zoom="0.89085148"
+     inkscape:cx="267.53196"
+     inkscape:cy="-17.548233"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -169,12 +169,18 @@
        width="267.30045"
        height="81.071426"
        x="16.542622"
-       y="951.67719" />
+       y="951.67719"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/drawable-xxhdpi/action_logo.png"
+       inkscape:export-xdpi="105.5104"
+       inkscape:export-ydpi="105.5104" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot3336"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:-15px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(-95.53634,640.45198)"><flowRegion
+       transform="translate(-95.53634,640.45198)"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/drawable-xxhdpi/action_logo.png"
+       inkscape:export-xdpi="105.5104"
+       inkscape:export-ydpi="105.5104"><flowRegion
          id="flowRegion3338"><rect
            id="rect3340"
            width="362.85715"
@@ -189,7 +195,10 @@
        x="292.67935"
        y="1024.0959"
        id="text3344"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/Ben/Dokumente/workspace/AesBoeBoe.git/app/src/main/res/drawable-xxhdpi/action_logo.png"
+       inkscape:export-xdpi="105.5104"
+       inkscape:export-ydpi="105.5104"><tspan
          sodipodi:role="line"
          id="tspan3346"
          x="292.67935"
