@@ -35,8 +35,6 @@ public class MainActivity extends Activity {
     private ToggleButton isArrivalTime;
     private FragmentTransaction fragmentTransaction;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +61,6 @@ public class MainActivity extends Activity {
 
         stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         via.setAdapter(stationListAdapter);
-
-
 
         search.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -158,27 +154,22 @@ public class MainActivity extends Activity {
     }
 
     private void startSearch() {
-
-
         getConnections(new Worker());
 
         Intent intent = new Intent(this, ResultListActivity.class);
 
         intent.putExtra("from", from.getText().toString());
         intent.putExtra("to", to.getText().toString());
-        intent.putExtra("date", new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()));
-        intent.putExtra("time", new String(time.getCurrentHour() + ":" + time.getCurrentMinute()));
+        intent.putExtra("date", getDateString(date));
+        intent.putExtra("time", getTimeString(time));
         intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
         startActivity(intent);
-
-
     }
 
     private void getConnections(Worker worker) {
-
         try {
-            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), new String(date.getDayOfMonth() + "." + date.getMonth() + "." + date.getYear()), new String(time.getCurrentHour() + ":" + time.getCurrentMinute()), isArrivalTime.isChecked()).get();
+            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), getDateString(date), getTimeString(time), isArrivalTime.isChecked()).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -212,8 +203,20 @@ public class MainActivity extends Activity {
 
 
         return new String[0];
-
-
-
     };
+
+    private String getDateString(DatePicker date) {
+        int day = date.getDayOfMonth();
+        int month = date.getMonth() + 1; // -> datepicker starts with January == 0
+        int year = date.getYear();
+
+        return new String(day + "." + month + "." + year);
+    }
+
+    private String getTimeString(TimePicker time) {
+        int hour = time.getCurrentHour();
+        int minute = time.getCurrentMinute();
+
+        return new String(hour + ":" + (minute > 0 ? minute : "00"));
+    }
 }
