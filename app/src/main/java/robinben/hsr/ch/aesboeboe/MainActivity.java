@@ -1,5 +1,6 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import android.widget.ToggleButton;
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity  {
+public class MainActivity extends Activity {
     private AutoCompleteTextView from;
     private AutoCompleteTextView via;
     private AutoCompleteTextView to;

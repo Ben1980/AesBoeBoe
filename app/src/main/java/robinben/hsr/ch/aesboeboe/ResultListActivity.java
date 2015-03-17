@@ -1,5 +1,6 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 
-public class ResultListActivity extends ActionBarActivity {
+public class ResultListActivity extends Activity {
     private TextView tvResultFrom;
     private TextView tvResultTo;
     private TextView tvResultDate;
