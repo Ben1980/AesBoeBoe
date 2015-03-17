@@ -33,6 +33,10 @@ public class DetailsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if(sections.size() == 1) {
+            return sections.size() + 1;
+        }
+
         return sections.size();
     }
 
@@ -53,24 +57,49 @@ public class DetailsAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.details_list_item, parent, false);
         }
 
-        Section section = (Section) getItem(position);
-
         TextView station = (TextView) convertView.findViewById(R.id.station);
         TextView arrival = (TextView) convertView.findViewById(R.id.arrival);
         TextView departure = (TextView) convertView.findViewById(R.id.departure);
         TextView rail = (TextView) convertView.findViewById(R.id.rail);
 
-        station.setText(section.getDeparture().getStation().getName());
-
-        String arrivalTime = formateDepartureArrivalTime(section.getArrival().getArrival());
-        arrival.setText(arrivalTime);
-
-        String departureTime = formateDepartureArrivalTime(section.getDeparture().getDeparture());
-        departure.setText(departureTime);
-
-        rail.setText(section.getDeparture().getPlatform());
+        setStation(position, station, arrival, departure, rail);
 
         return convertView;
+    }
+
+    private void setStation(int position, TextView station, TextView arrival, TextView departure, TextView rail) {
+        Section section;
+        if(sections.size() > 1) {
+            section = (Section) getItem(position);
+        }
+        else {
+            section = (Section) getItem(position == 0 ? position : position - 1);
+        }
+
+        if(position == 0) { //First Station: Only departure should be shown
+            station.setText(section.getDeparture().getStation().getName());
+            String departureTime = formateDepartureArrivalTime(section.getDeparture().getDeparture());
+            departure.setText(departureTime);
+            rail.setText(section.getDeparture().getPlatform());
+        }
+        if (position == getCount() - 1) {    //Last Station: Only arrival should be shown
+            station.setText(section.getArrival().getStation().getName());
+            String arrivalTime = formateDepartureArrivalTime(section.getArrival().getArrival());
+            arrival.setText(arrivalTime);
+            rail.setText(section.getArrival().getPlatform());
+        }
+        if(position > 0 && position < getCount() - 1) {
+            station.setText(section.getDeparture().getStation().getName());
+
+            String departureTime = formateDepartureArrivalTime(section.getDeparture().getDeparture());
+            departure.setText(departureTime);
+
+            Section lastsection = (Section) getItem(position - 1);
+            String arrivalTime = formateDepartureArrivalTime(lastsection.getArrival().getArrival());
+            arrival.setText(arrivalTime);
+
+            rail.setText(section.getDeparture().getPlatform());
+        }
     }
 
     private String formateDepartureArrivalTime(String dateStr) {

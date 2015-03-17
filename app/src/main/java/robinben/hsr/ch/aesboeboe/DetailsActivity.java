@@ -12,6 +12,10 @@ import android.widget.TextView;
 public class DetailsActivity extends ActionBarActivity {
     private TextView tvResultFrom;
     private TextView tvResultTo;
+    private TextView tvResultDate;
+    private TextView tvResultTime;
+    private boolean isArrivalTime;
+    private TextView tvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +24,23 @@ public class DetailsActivity extends ActionBarActivity {
 
         tvResultFrom = (TextView) findViewById(R.id.tvResultFrom);
         tvResultTo = (TextView) findViewById(R.id.tvResultTo);
+        tvResultDate = (TextView) findViewById(R.id.tvResultDate);
+        tvResultTime = (TextView) findViewById(R.id.tvResultTime);
+        tvTime = (TextView) findViewById(R.id.tvTime);
 
         Intent intent = getIntent();
 
+        isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
         tvResultFrom.setText(intent.getStringExtra("from"));
         tvResultTo.setText(intent.getStringExtra("to"));
+        tvResultDate.setText(intent.getStringExtra("date"));
+        tvResultTime.setText(intent.getStringExtra("time"));
+        selectArrivalDepartureLabel();
 
         DetailsAdapter adapter = new DetailsAdapter(this, Globals.connection);
 
         ListView listView = (ListView)findViewById(R.id.detailsView);
         listView.setAdapter(adapter);
-
     }
 
 
@@ -56,5 +66,13 @@ public class DetailsActivity extends ActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void selectArrivalDepartureLabel () {
+
+        if (isArrivalTime) {
+            tvTime.setText(R.string.timeIsArrival);
+        } else
+            tvTime.setText(R.string.timeIsDeparture);
     }
 }
