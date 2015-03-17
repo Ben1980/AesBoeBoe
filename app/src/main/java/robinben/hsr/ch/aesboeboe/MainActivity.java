@@ -3,6 +3,7 @@ package robinben.hsr.ch.aesboeboe;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -20,6 +21,11 @@ import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 import java.util.concurrent.ExecutionException;
+
+import ch.schoeb.opendatatransport.IOpenTransportRepository;
+import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
+import ch.schoeb.opendatatransport.model.Station;
+import ch.schoeb.opendatatransport.model.StationList;
 
 
 public class MainActivity extends ActionBarActivity  {
@@ -153,34 +159,23 @@ public class MainActivity extends ActionBarActivity  {
     }
 
     private void startSearch() {
-        getConnections(new Worker());
-
         Intent intent = new Intent(this, ResultListActivity.class);
 
         intent.putExtra("from", from.getText().toString());
         intent.putExtra("to", to.getText().toString());
         intent.putExtra("date", getDateString(date));
         intent.putExtra("time", getTimeString(time));
+        intent.putExtra("via", via.getText().toString());
         intent.putExtra("isArrivalTime", isArrivalTime.isChecked());
 
         startActivity(intent);
     }
 
-    private void getConnections(Worker worker) {
-        try {
-            worker.execute(from.getText().toString(), to.getText().toString(), via.getText().toString(), getDateString(date), getTimeString(time), isArrivalTime.isChecked()).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void checkAutoCompleteList(CharSequence s, int before, int count, AutoCompleteTextView view) {
         if (count > before){
-            if(s.length() == 3){
-                stationNameList = lookupStationNames(s);
+            if(s.length() >= 2){
+
+                new WorkerAutoComplete().execute(s.toString());
                 stationListAdapter = new ArrayAdapter<>(mainActivityContext,android.R.layout.simple_list_item_1,stationNameList);
                 view.setAdapter(stationListAdapter);
 
@@ -189,19 +184,45 @@ public class MainActivity extends ActionBarActivity  {
         }
     }
 
-    private String[] lookupStationNames(CharSequence s) {
-        try {
-            WorkerAutoComplete workerAutoComplete = new WorkerAutoComplete();
-            return workerAutoComplete.execute(s.toString()).get();
+    public class WorkerAutoComplete extends AsyncTask<String, Integer, String[]> {
+        private IOpenTransportRepository connectionSearch;
+        private StationList stationObjectList;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        };
 
+        @Override
+        protected void onPostExecute(String[] result) {
+            super.onPostExecute(result);
+            stationNameList = result;
+        }
 
-        return new String[0];
+        @Override
+        protected String[] doInBackground(String... arg) {
+
+            stationObjectList = connectionSearch.findStations(arg[0]);
+            if (stationObjectList == null){
+                return new String[0];
+            }
+
+            stationNameList = new String[stationObjectList.getStations().size()];
+
+            int i = 0;
+            for (Station s : stationObjectList.getStations()) {
+                stationNameList[i] = s.getName();
+                i++;
+            }
+            return stationNameList;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
     };
 
     private String getDateString(DatePicker date) {
