@@ -1,9 +1,8 @@
 package robinben.hsr.ch.aesboeboe;
 
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -12,7 +11,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+
+import ch.schoeb.opendatatransport.IOpenTransportRepository;
+import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
+import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
 public class ResultListActivity extends ActionBarActivity {
@@ -20,9 +22,12 @@ public class ResultListActivity extends ActionBarActivity {
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
+    private TextView via;
     private boolean isArrivalTime;
     private TextView tvTime;
-
+    private ListView listView;
+    private Context context = this;
+    private SearchWorker searchWorker = new SearchWorker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +47,13 @@ public class ResultListActivity extends ActionBarActivity {
         tvResultTo.setText(intent.getStringExtra("to"));
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
+        via = new TextView(this);
+        via.setText(intent.getStringExtra("via"));
         selectArrivalDepartureLabel();
 
-        ConnectionAdapter adapter = new ConnectionAdapter(this, Globals.connectionList);
+        searchWorker.execute(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), via.getText().toString(), tvResultDate.getText().toString(), tvResultTime.getText().toString(), isArrivalTime);
 
-        ListView listView = (ListView)findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+        listView = (ListView)findViewById(R.id.listView);
 
         Globals.searchBusyFragment.dismiss();
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -59,6 +65,37 @@ public class ResultListActivity extends ActionBarActivity {
                 startDetailsView();
             }
         });
+    }
+
+    class SearchWorker extends AsyncTask<Object, Integer, ConnectionList> {
+        private IOpenTransportRepository connectionSearch;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
+        }
+
+        @Override
+        protected void onPostExecute(ConnectionList result) {
+            super.onPostExecute(result);
+
+            ConnectionAdapter adapter = new ConnectionAdapter(context, result);
+            listView.setAdapter(adapter);
+
+            Globals.connectionList = result;
+        }
+
+        @Override
+        protected ConnectionList doInBackground(Object... arg) {
+            return connectionSearch.searchConnections((String)arg[0]/*from*/, (String)arg[1]/*to*/, (String)arg[2]/*via*/, (String)arg[3]/*date*/, (String)arg[4]/*time*/, (boolean)arg[5]/*isArrivalTime*/);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
     }
 
     @Override
