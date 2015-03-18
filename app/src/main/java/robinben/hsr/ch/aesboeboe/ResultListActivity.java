@@ -1,7 +1,14 @@
 package robinben.hsr.ch.aesboeboe;
 
+
 import android.app.ProgressDialog;
 import android.content.Context;
+
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +25,7 @@ import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
 import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
-public class ResultListActivity extends ActionBarActivity {
+public class ResultListActivity extends Activity {
     private TextView tvResultFrom;
     private TextView tvResultTo;
     private TextView tvResultDate;

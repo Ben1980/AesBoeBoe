@@ -6,29 +6,35 @@
 
     <application
         android:allowBackup="true"
+       android:logo="@drawable/action_logo"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+      >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:icon="@mipmap/ic_launcher"
+            android:label=""
 
+            >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label=""
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
             android:name=".ResultListActivity"
-            android:label="@string/title_activity_result_list" >
+            android:label=""
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
             android:name=".DetailsActivity"
-            android:label="@string/title_activity_details" >
+            android:label=""
+            android:parentActivityName=".ResultListActivity">
         </activity>
     </application>
 
