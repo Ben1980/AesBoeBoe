@@ -1,12 +1,10 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -18,7 +16,6 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
-
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
 import ch.schoeb.opendatatransport.model.Station;

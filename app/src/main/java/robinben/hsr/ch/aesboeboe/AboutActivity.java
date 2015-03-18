@@ -2,7 +2,7 @@ package robinben.hsr.ch.aesboeboe;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+
 
 
 public class AboutActivity extends Activity {

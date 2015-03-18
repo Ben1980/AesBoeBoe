@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import ch.schoeb.opendatatransport.model.Connection;
-import ch.schoeb.opendatatransport.model.ConnectionList;
+
 
 /**
  * Created by Ben on 01.03.15.
