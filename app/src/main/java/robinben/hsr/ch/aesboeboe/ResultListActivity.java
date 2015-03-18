@@ -1,5 +1,6 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -69,10 +70,17 @@ public class ResultListActivity extends ActionBarActivity {
 
     class SearchWorker extends AsyncTask<Object, Integer, ConnectionList> {
         private IOpenTransportRepository connectionSearch;
+        private ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(ResultListActivity.this);
+            progressDialog.setMessage("Suche Verbindung...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
 
             connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         }
@@ -85,6 +93,8 @@ public class ResultListActivity extends ActionBarActivity {
             listView.setAdapter(adapter);
 
             Globals.connectionList = result;
+
+            progressDialog.dismiss();
         }
 
         @Override
