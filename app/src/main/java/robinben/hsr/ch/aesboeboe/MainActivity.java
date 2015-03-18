@@ -1,6 +1,5 @@
 package robinben.hsr.ch.aesboeboe;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,19 +7,15 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
-import java.util.concurrent.ExecutionException;
 
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
@@ -38,7 +33,6 @@ public class MainActivity extends ActionBarActivity  {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
-    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +64,6 @@ public class MainActivity extends ActionBarActivity  {
         search.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                fragmentTransaction = getFragmentManager().beginTransaction();
-                Globals.searchBusyFragment = searchBusyFragment.newInstance();
-                Globals.searchBusyFragment.show(fragmentTransaction, "searchBusyFragment");
                 startSearch();
             }
         });

@@ -1,5 +1,6 @@
 package robinben.hsr.ch.aesboeboe;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,9 +23,6 @@ public class ResultListActivity extends ActionBarActivity {
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
-    private TextView via;
-    private boolean isArrivalTime;
-    private TextView tvTime;
     private ListView listView;
     private Context context = this;
     private SearchWorker searchWorker = new SearchWorker();
@@ -38,41 +36,48 @@ public class ResultListActivity extends ActionBarActivity {
         tvResultTo = (TextView) findViewById(R.id.tvResultTo);
         tvResultDate = (TextView) findViewById(R.id.tvResultDate);
         tvResultTime = (TextView) findViewById(R.id.tvResultTime);
-        tvTime = (TextView) findViewById(R.id.tvTime);
+        TextView tvTime = (TextView) findViewById(R.id.tvTime);
 
         Intent intent = getIntent();
 
-        isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
+        boolean isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
         tvResultFrom.setText(intent.getStringExtra("from"));
         tvResultTo.setText(intent.getStringExtra("to"));
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
-        via = new TextView(this);
+        TextView via = new TextView(this);
         via.setText(intent.getStringExtra("via"));
-        selectArrivalDepartureLabel();
+
+        selectArrivalDepartureLabel(isArrivalTime, tvTime);
 
         searchWorker.execute(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), via.getText().toString(), tvResultDate.getText().toString(), tvResultTime.getText().toString(), isArrivalTime);
 
         listView = (ListView)findViewById(R.id.listView);
 
-        Globals.searchBusyFragment.dismiss();
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Globals.connection = Globals.connectionList.getConnections().get(position);
 
-                startDetailsView();
+                startDetailsView(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), tvResultDate.getText().toString(), tvResultTime.getText().toString());
             }
         });
     }
 
     class SearchWorker extends AsyncTask<Object, Integer, ConnectionList> {
         private IOpenTransportRepository connectionSearch;
+        private ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(ResultListActivity.this);
+            progressDialog.setMessage("Suche Verbindung...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
 
             connectionSearch = OpenTransportRepositoryFactory.CreateOnlineOpenTransportRepository();
         }
@@ -81,10 +86,12 @@ public class ResultListActivity extends ActionBarActivity {
         protected void onPostExecute(ConnectionList result) {
             super.onPostExecute(result);
 
-            ConnectionAdapter adapter = new ConnectionAdapter(context, result);
+            Globals.connectionList = result;
+
+            ConnectionAdapter adapter = new ConnectionAdapter(context);
             listView.setAdapter(adapter);
 
-            Globals.connectionList = result;
+            progressDialog.dismiss();
         }
 
         @Override
@@ -122,19 +129,18 @@ public class ResultListActivity extends ActionBarActivity {
         }
     }
 
-    private void startDetailsView() {
+    private void startDetailsView(String from, String to, String date, String time) {
         Intent intent = new Intent(this, DetailsActivity.class);
 
-        intent.putExtra("from", tvResultFrom.getText().toString());
-        intent.putExtra("to", tvResultTo.getText().toString());
-        intent.putExtra("date", tvResultDate.getText().toString());
-        intent.putExtra("time", tvResultTime.getText().toString());
+        intent.putExtra("from", from);
+        intent.putExtra("to", to);
+        intent.putExtra("date", date);
+        intent.putExtra("time", time);
 
         startActivity(intent);
     }
 
-    private void selectArrivalDepartureLabel () {
-
+    private void selectArrivalDepartureLabel(boolean isArrivalTime, TextView tvTime) {
         if (isArrivalTime) {
             tvTime.setText(R.string.timeIsArrival);
         } else

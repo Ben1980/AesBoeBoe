@@ -9,11 +9,8 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import ch.schoeb.opendatatransport.model.Connection;
-import ch.schoeb.opendatatransport.model.ConnectionStation;
 import ch.schoeb.opendatatransport.model.Section;
 
 /**
@@ -21,14 +18,12 @@ import ch.schoeb.opendatatransport.model.Section;
  */
 public class DetailsAdapter extends BaseAdapter {
     private Context context;
-    private Connection connection;
     private List<Section> sections;
 
-    public DetailsAdapter(Context context, Connection connection) {
+    public DetailsAdapter(Context context) {
         this.context = context;
-        this.connection = connection;
 
-        sections = connection.getSections();
+        sections = Globals.connection.getSections();
     }
 
     @Override
