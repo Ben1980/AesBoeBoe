@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import ch.schoeb.opendatatransport.model.Connection;
@@ -22,9 +21,9 @@ public class ConnectionAdapter extends BaseAdapter {
     private Context context;
     private List<Connection> connections;
 
-    public ConnectionAdapter(Context context, ConnectionList connections) {
+    public ConnectionAdapter(Context context) {
         this.context = context;
-        this.connections = connections.getConnections();
+        this.connections = Globals.connectionList.getConnections();
     }
 
     @Override

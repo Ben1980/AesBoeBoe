@@ -11,7 +11,4 @@ public class AboutActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
     }
-
-
-
 }

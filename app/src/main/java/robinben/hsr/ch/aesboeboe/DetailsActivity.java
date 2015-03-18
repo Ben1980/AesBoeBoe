@@ -10,39 +10,33 @@ import android.widget.TextView;
 
 
 public class DetailsActivity extends ActionBarActivity {
-    private TextView tvResultFrom;
-    private TextView tvResultTo;
-    private TextView tvResultDate;
-    private TextView tvResultTime;
-    private boolean isArrivalTime;
-    private TextView tvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        tvResultFrom = (TextView) findViewById(R.id.tvResultFrom);
-        tvResultTo = (TextView) findViewById(R.id.tvResultTo);
-        tvResultDate = (TextView) findViewById(R.id.tvResultDate);
-        tvResultTime = (TextView) findViewById(R.id.tvResultTime);
-        tvTime = (TextView) findViewById(R.id.tvTime);
+        TextView tvResultFrom = (TextView) findViewById(R.id.tvResultFrom);
+        TextView tvResultTo = (TextView) findViewById(R.id.tvResultTo);
+        TextView tvResultDate = (TextView) findViewById(R.id.tvResultDate);
+        TextView tvResultTime = (TextView) findViewById(R.id.tvResultTime);
+        TextView tvTime = (TextView) findViewById(R.id.tvTime);
 
         Intent intent = getIntent();
 
-        isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
+        boolean isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
         tvResultFrom.setText(intent.getStringExtra("from"));
         tvResultTo.setText(intent.getStringExtra("to"));
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
-        selectArrivalDepartureLabel();
 
-        DetailsAdapter adapter = new DetailsAdapter(this, Globals.connection);
+        selectArrivalDepartureLabel(isArrivalTime, tvTime);
+
+        DetailsAdapter adapter = new DetailsAdapter(this);
 
         ListView listView = (ListView)findViewById(R.id.detailsView);
         listView.setAdapter(adapter);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,8 +62,7 @@ public class DetailsActivity extends ActionBarActivity {
         }
     }
 
-    private void selectArrivalDepartureLabel () {
-
+    private void selectArrivalDepartureLabel (boolean isArrivalTime, TextView tvTime) {
         if (isArrivalTime) {
             tvTime.setText(R.string.timeIsArrival);
         } else
