@@ -3,6 +3,7 @@ package robinben.hsr.ch.aesboeboe;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,6 +34,7 @@ public class MainActivity extends Activity {
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +50,8 @@ public class MainActivity extends Activity {
         time = (TimePicker) findViewById(R.id.timePicker);
         time.setIs24HourView(true);
         isArrivalTime = (ToggleButton) findViewById(R.id.btIsArrivalTime);
-        isArrivalTime.setTextOff("Abfahrt");
-        isArrivalTime.setTextOn("Ankunft");
+        isArrivalTime.setTextOff(getString(R.string.departureTime));
+        isArrivalTime.setTextOn(getString(R.string.arrivalTime));
 
         stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         from.setAdapter(stationListAdapter);
@@ -121,6 +123,38 @@ public class MainActivity extends Activity {
             }
         });
     }
+        @Override
+        protected void onResume(){
+            super.onResume();
+
+           SharedPreferences settings = getSharedPreferences("AesBoeBoe", 0);
+           from.setText(settings.getString("from", ""));
+           via.setText(settings.getString("via", ""));
+           to.setText(settings.getString("to", ""));
+           isArrivalTime.setChecked(settings.getBoolean("isArrivalTime", isArrivalTime.isChecked()));
+
+        };
+
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        SharedPreferences settings = getSharedPreferences("AesBoeBoe", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("from", from.getText().toString());
+        editor.putString("via", via.getText().toString());
+        editor.putString("to", to.getText().toString());
+        editor.putBoolean("isArrivalTime", isArrivalTime.isChecked());
+
+
+
+        // Commit the edits!
+        editor.commit();
+
+    };
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
