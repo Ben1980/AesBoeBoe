@@ -22,6 +22,8 @@ Features:
 	- Angabe ob gewählte Zeitpunkt die Ankunfts- oder Abfahrts-Zeit ist
 	- Date und Time picker
 	- Während der Suche wird dem User angezeigt, dass etwas passiert. z.B. ein „Bitte Warten“-Dialog oder ein einfacher Indicator.
+	- Autovervollständigung
+	
 ##ToDo:
 
 Ben
