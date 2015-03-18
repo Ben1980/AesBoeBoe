@@ -74,13 +74,8 @@ public class ConnectionAdapter extends BaseAdapter {
     }
 
     private String formateDepartureArrivalTime(String dateStr) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        SimpleDateFormat format2 = new SimpleDateFormat("HH:mm");
-
-        try {
-            Date date = format1.parse(dateStr);
-            String test = format2.format(date);
-            return test;
+       try {
+            return new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(dateStr));
         } catch (ParseException e) {
             e.printStackTrace();
         }
