@@ -1,10 +1,12 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -54,6 +56,7 @@ public class ConnectionAdapter extends BaseAdapter {
         TextView arrival = (TextView) convertView.findViewById(R.id.arrival);
         TextView duration = (TextView) convertView.findViewById(R.id.duration);
         TextView delay = (TextView) convertView.findViewById(R.id.delay);
+        ImageView next = (ImageView) convertView.findViewById(R.id.showDetails);
 
         String departureTime = formateDepartureArrivalTime(connection.getFrom().getDeparture());
         departure.setText(departureTime);
@@ -63,6 +66,8 @@ public class ConnectionAdapter extends BaseAdapter {
 
         String durationTime = formatDurationtime(connection.getDuration());
         duration.setText(durationTime);
+
+        next.setImageResource(R.drawable.ic_action_next_item);
 
         int delayTime = Integer.parseInt(connection.getTo().getDelay());
         if(delayTime > 0) {

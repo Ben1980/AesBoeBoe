@@ -145,6 +145,16 @@
             android:textAlignment="center"
             android:gravity="center"
             android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/dummy"
+            android:layout_toRightOf="@id/delay"
+            android:textSize="12sp"
+            android:layout_weight="0.10"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <ListView
