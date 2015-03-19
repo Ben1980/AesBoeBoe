@@ -26,8 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/aboutDetailsBen"
-        android:id="@+id/ben"
+        android:text="@string/benName"
+        android:id="@+id/benName"
         android:layout_below="@+id/action_about"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="false"/>
@@ -36,11 +36,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/aboutDetailsRobin"
-        android:id="@+id/robin"
-        android:layout_below="@+id/ben"
+        android:text="@string/benEmail"
+        android:id="@+id/benEmail"
+        android:layout_below="@+id/benName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="false"/>
+
+    <TextView
+        android:paddingTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/robinName"
+        android:id="@+id/robinName"
+        android:layout_below="@+id/benEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/robinEmail"
+        android:id="@+id/robinEmail"
+        android:layout_below="@+id/robinName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="false"/>
 
 
 
