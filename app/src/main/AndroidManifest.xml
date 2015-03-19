@@ -10,10 +10,12 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         android:label="@string/app_name"
+
       >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
 
             >
             <intent-filter >
@@ -24,17 +26,20 @@
         <activity
             android:name=".AboutActivity"
             android:label=""
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ResultListActivity"
             android:label=""
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".DetailsActivity"
             android:label=""
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
