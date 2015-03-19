@@ -16,6 +16,7 @@
     <string name="action_logo">logo</string>
     <string name="departureTime">Ab</string>
     <string name="arrivalTime">An</string>
+    <string name="homeSavedToast"> als Zuhause gespeichert</string>
 
 
 </resources>
