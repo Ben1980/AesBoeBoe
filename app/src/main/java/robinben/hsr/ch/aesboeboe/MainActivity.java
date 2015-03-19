@@ -8,15 +8,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
@@ -110,13 +111,24 @@ public class MainActivity extends Activity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences settings = getSharedPreferences("Home", 0);
+                to.setText(settings.getString("home", ""));
 
             }
         });
         home.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return false;
+                SharedPreferences settings = getSharedPreferences("Home", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("home", from.getText().toString());
+                editor.apply();
+
+                CharSequence text = from.getText().toString() + "  " + getString(R.string.homeSavedToast);
+                Toast toast = Toast.makeText(mainActivityContext, text, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.LEFT, 250, 400);
+                toast.show();
+                return true;
             }
         });
 
@@ -187,9 +199,6 @@ public class MainActivity extends Activity {
         editor.putString("to", to.getText().toString());
         editor.putBoolean("isArrivalTime", isArrivalTime.isChecked());
 
-
-
-        // Commit the edits!
         editor.commit();
 
     };

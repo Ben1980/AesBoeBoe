@@ -17,5 +17,6 @@
     <string name="departureTime">Ab</string>
     <string name="arrivalTime">An</string>
     <string name="sorry">Keine Verbindung gefunden...</string>
+    <string name="homeSavedToast"> als Zuhause gespeichert</string>
 
 </resources>
