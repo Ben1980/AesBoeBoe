@@ -260,6 +260,6 @@ public class MainActivity extends Activity {
         int hour = time.getCurrentHour();
         int minute = time.getCurrentMinute();
 
-        return new String(hour + ":" + (minute > 0 ? minute : "00"));
+        return new String(hour + ":" + (minute > 0 ? minute > 9 ? minute : "0" + minute : "00"));
     }
 }
