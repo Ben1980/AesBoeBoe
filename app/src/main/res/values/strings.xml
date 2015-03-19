@@ -14,8 +14,8 @@
     <string name="timeIsArrival">Zeit (an)</string>
     <string name="timeIsDeparture">Zeit (ab)</string>
     <string name="action_logo">logo</string>
-    <string name="departureTime">Abfahrts Zeit</string>
-    <string name="arrivalTime">Ankunfts Zeit</string>
+    <string name="departureTime">Ab</string>
+    <string name="arrivalTime">An</string>
 
 
 </resources>

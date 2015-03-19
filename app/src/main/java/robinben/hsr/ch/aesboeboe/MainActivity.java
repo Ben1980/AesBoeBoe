@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
@@ -80,6 +81,30 @@ public class MainActivity extends Activity {
             };
         });
 
+        ImageButton discardFrom = (ImageButton) findViewById(R.id.discard1);
+        ImageButton discardTo = (ImageButton) findViewById(R.id.discard2);
+        ImageButton discardVia = (ImageButton) findViewById(R.id.discard3);
+
+        discardFrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                from.setText("");
+            }
+        });
+
+        discardTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                to.setText("");
+            }
+        });
+
+        discardVia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                via.setText("");
+            }
+        });
 
         from.addTextChangedListener(new TextWatcher() {
             @Override

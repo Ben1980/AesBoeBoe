@@ -25,15 +25,15 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btSearch"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_action_search"/>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/btOppositeDirection"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_action_refresh"/>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOff="Ab"
+                android:id="@+id/btIsArrivalTime"
+                android:checked="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -42,29 +42,72 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center">
-            <AutoCompleteTextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="von"
-                android:id="@+id/etFromField"
-                android:singleLine="true"
-                android:imeOptions="actionNext"/>
-            <AutoCompleteTextView
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <AutoCompleteTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content"
+                    android:hint="von"
+                    android:id="@+id/etFromField"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"/>
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discard1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_discard"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="nach"
-                android:id="@+id/etToField"
-                android:layout_below="@id/etFromField"
-                android:singleLine="true"
-                android:imeOptions="actionNext"/>
-            <AutoCompleteTextView
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <AutoCompleteTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content"
+                    android:hint="nach"
+                    android:id="@+id/etToField"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"/>
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discard2"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_discard"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="über"
-                android:id="@+id/etViaField"
-                android:layout_below="@id/etToField"
-                android:singleLine="true"
-                android:imeOptions="actionNext"/>
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <AutoCompleteTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.85"
+                    android:layout_height="wrap_content"
+                    android:hint="über"
+                    android:id="@+id/etViaField"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"/>
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discard3"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_discard"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -74,12 +117,6 @@
         android:layout_weight="0.70"
         android:orientation="vertical"
         android:gravity="top">
-        <ToggleButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textOff="Abfahrt"
-            android:id="@+id/btIsArrivalTime"
-            android:checked="false" />
         <DatePicker
             android:layout_height="0dp"
             android:layout_weight="0.5"
@@ -97,4 +134,10 @@
             android:layout_gravity="center_horizontal"
             android:timePickerMode="spinner"/>
     </LinearLayout>
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btSearch"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_action_search"/>
 </LinearLayout>
