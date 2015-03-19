@@ -89,7 +89,7 @@ public class ResultListActivity extends Activity {
         protected void onPostExecute(ConnectionList result) {
             super.onPostExecute(result);
 
-            if(result != null) {
+            if(result != null && result.getConnections().size() > 0) {
                 Globals.connectionList = result;
 
                 ConnectionAdapter adapter = new ConnectionAdapter(context);
@@ -100,7 +100,7 @@ public class ResultListActivity extends Activity {
 
             progressDialog.dismiss();
 
-            if(result == null) {
+            if(result == null || result.getConnections().size() == 0) {
                 Toast.makeText(context, R.string.sorry, Toast.LENGTH_LONG).show();
                 finish();
             }
