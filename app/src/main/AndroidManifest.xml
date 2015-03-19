@@ -35,7 +35,7 @@
         <activity
             android:name=".DetailsActivity"
             android:label=""
-            android:parentActivityName=".ResultListActivity">
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 
