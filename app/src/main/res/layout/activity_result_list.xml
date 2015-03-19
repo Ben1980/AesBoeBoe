@@ -157,10 +157,66 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/earlier"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/background">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:src="@drawable/ic_action_collapse" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="@string/earlier" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:src="@drawable/ic_action_collapse" />
+    </LinearLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/listView"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.85" />
+        android:layout_weight="0.7" />
+    <LinearLayout
+        android:id="@+id/later"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/background">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:src="@drawable/ic_action_expand" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="@string/later" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:src="@drawable/ic_action_expand" />
+    </LinearLayout>
 </LinearLayout>

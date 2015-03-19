@@ -11,9 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
@@ -26,9 +31,11 @@ public class ResultListActivity extends Activity {
     private TextView tvResultTo;
     private TextView tvResultDate;
     private TextView tvResultTime;
+    private TextView via;
     private ListView listView;
+    private boolean isArrivalTime;
     private Context context = this;
-    private SearchWorker searchWorker = new SearchWorker();
+    //private SearchWorker searchWorker = new SearchWorker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +50,17 @@ public class ResultListActivity extends Activity {
 
         Intent intent = getIntent();
 
-        boolean isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
+        isArrivalTime = intent.getBooleanExtra("isArrivalTime", false);
         tvResultFrom.setText(intent.getStringExtra("from"));
         tvResultTo.setText(intent.getStringExtra("to"));
         tvResultDate.setText(intent.getStringExtra("date"));
         tvResultTime.setText(intent.getStringExtra("time"));
-        TextView via = new TextView(this);
+        via = new TextView(this);
         via.setText(intent.getStringExtra("via"));
 
         selectArrivalDepartureLabel(isArrivalTime, tvTime);
 
-        searchWorker.execute(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), via.getText().toString(), tvResultDate.getText().toString(), tvResultTime.getText().toString(), isArrivalTime);
+        new SearchWorker().execute(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), via.getText().toString(), tvResultDate.getText().toString(), tvResultTime.getText().toString(), isArrivalTime);
 
         listView = (ListView)findViewById(R.id.listView);
 
@@ -66,6 +73,87 @@ public class ResultListActivity extends Activity {
                 startDetailsView(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), tvResultDate.getText().toString(), tvResultTime.getText().toString());
             }
         });
+
+        LinearLayout earlier = (LinearLayout) findViewById(R.id.earlier);
+        earlier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int lastIndex = Globals.connectionList.getConnections().size() - 1;
+                if(lastIndex >= 0) {
+                    Connection firstConnection = Globals.connectionList.getConnections().get(0);
+                    Connection lastConnection = Globals.connectionList.getConnections().get(lastIndex);
+
+                    String first = firstConnection.getFrom().getDeparture();
+                    String second = lastConnection.getFrom().getDeparture();
+                    String newSearchStr = calcTime(first, second);
+
+                    String departureDateStr = new String();
+                    String departureTimeStr = new String();
+                    try {
+                        departureDateStr = new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(newSearchStr));
+                        departureTimeStr = new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(newSearchStr));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    new SearchWorker().execute(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), via.getText().toString(), departureDateStr, departureTimeStr, isArrivalTime);
+                }
+            }
+        });
+
+        LinearLayout later = (LinearLayout) findViewById(R.id.later);
+        later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int lastIndex = Globals.connectionList.getConnections().size() - 1;
+                if(lastIndex >= 0) {
+                    Connection connection = Globals.connectionList.getConnections().get(lastIndex);
+                    String departure = connection.getFrom().getDeparture();
+                    String departureDateStr = new String();
+                    String departureTimeStr = new String();
+                    try {
+                        departureDateStr = new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(departure));
+                        departureTimeStr = new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(departure));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    new SearchWorker().execute(tvResultFrom.getText().toString(), tvResultTo.getText().toString(), via.getText().toString(), departureDateStr, departureTimeStr, isArrivalTime);
+                }
+            }
+        });
+    }
+
+    protected String calcTime(String first, String second) {
+        String result = new String();
+
+        try {
+            String a = new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(first));
+            String b = new SimpleDateFormat("HH:mm").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(second));
+
+            String[] arr = a.split("[d:]+");
+            int hoursA = Integer.parseInt(arr[0]);
+            int minutesA = Integer.parseInt(arr[1]);
+
+            arr = b.split("[d:]+");
+            int hoursB = Integer.parseInt(arr[0]);
+            int minutesB = Integer.parseInt(arr[1]);
+
+            int diffMinutes = minutesB - minutesA;
+            int diffHours = (hoursB - hoursA);
+            int newMinutes = minutesA - diffMinutes;
+            int newHoures = hoursA - diffHours;
+            newHoures -= newMinutes < 0 ? 1 : 0;
+            newMinutes = newMinutes < 0 ? 60 - Math.abs(newMinutes) : newMinutes;
+
+
+            result = new SimpleDateFormat("yyyy-MM-dd'T'").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(first));
+            result += newHoures + ":" + newMinutes + ":00" + new SimpleDateFormat("Z").format(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(first));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     class SearchWorker extends AsyncTask<Object, Integer, ConnectionList> {

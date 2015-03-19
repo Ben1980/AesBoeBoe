@@ -18,5 +18,7 @@
     <string name="arrivalTime">An</string>
     <string name="sorry">Keine Verbindung gefunden...</string>
     <string name="homeSavedToast"> als Zuhause gespeichert</string>
+    <string name="later">spätere Verbindung</string>
+    <string name="earlier">frühere Verbindung</string>
 
 </resources>

@@ -25,24 +25,18 @@ Features:
 	- Autovervollständigung
 	- Daten werden gespeichert und wider hergestellt
 	- Home button für den Weg nach Hause (lange drücken um aktuelle Station (von) als home zu setzen) (kurz drücken um home Verbindung nach home zu suchen)
+	- Spätere Verbindungen anzeigen für gesuchte Verbindung
+	- Frühere Verbindungen anzeigen für gesuchte Verbindung
+	- Senden von Verbindungen an Freunde
 	
 ##ToDo:
 
 Ben
 ---
-   - Anzeigen der Verkehrsmittel
-   - Anzeigen der Klasse
    
 
 Robin
 -----
- - 
- - Spätere Verbindungen anzeigen für gesuchte Verbindung
- 
-  
-Neu:
-
-Datum und Zeit von jetzt eingeben wenn die Seite geladen wird
 
   
   
