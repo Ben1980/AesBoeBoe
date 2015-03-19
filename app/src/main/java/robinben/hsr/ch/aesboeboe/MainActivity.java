@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivityContext = this;
+        setTitle("");
 
         ImageButton search = (ImageButton) findViewById(R.id.btSearch);
         ImageButton oppositeDirection = (ImageButton) findViewById(R.id.btOppositeDirection);
