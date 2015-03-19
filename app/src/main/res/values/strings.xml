@@ -16,6 +16,6 @@
     <string name="action_logo">logo</string>
     <string name="departureTime">Ab</string>
     <string name="arrivalTime">An</string>
-
+    <string name="sorry">Keine Verbindung gefunden...</string>
 
 </resources>

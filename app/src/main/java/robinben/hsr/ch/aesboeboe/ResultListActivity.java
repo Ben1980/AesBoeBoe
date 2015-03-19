@@ -13,8 +13,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import ch.schoeb.opendatatransport.IOpenTransportRepository;
 import ch.schoeb.opendatatransport.OpenTransportRepositoryFactory;
+import ch.schoeb.opendatatransport.model.Connection;
 import ch.schoeb.opendatatransport.model.ConnectionList;
 
 
@@ -86,12 +89,21 @@ public class ResultListActivity extends Activity {
         protected void onPostExecute(ConnectionList result) {
             super.onPostExecute(result);
 
-            Globals.connectionList = result;
+            if(result != null) {
+                Globals.connectionList = result;
 
-            ConnectionAdapter adapter = new ConnectionAdapter(context);
-            listView.setAdapter(adapter);
+                ConnectionAdapter adapter = new ConnectionAdapter(context);
+                listView.setAdapter(adapter);
+
+                checkFromTo();
+            }
 
             progressDialog.dismiss();
+
+            if(result == null) {
+                Toast.makeText(context, R.string.sorry, Toast.LENGTH_LONG).show();
+                finish();
+            }
         }
 
         @Override
@@ -145,5 +157,20 @@ public class ResultListActivity extends Activity {
             tvTime.setText(R.string.timeIsArrival);
         } else
             tvTime.setText(R.string.timeIsDeparture);
+    }
+
+    protected void checkFromTo() {
+        if(!Globals.connectionList.getConnections().isEmpty()) {
+            Connection connection = Globals.connectionList.getConnections().get(0);
+            String from = connection.getFrom().getLocation().getName().toString();
+            if (!tvResultFrom.getText().toString().equals(from)) {
+                tvResultFrom.setText(from);
+            }
+
+            String to = connection.getTo().getLocation().getName().toString();
+            if (!tvResultTo.getText().toString().equals(to)) {
+                tvResultTo.setText(to);
+            }
+        }
     }
 };
