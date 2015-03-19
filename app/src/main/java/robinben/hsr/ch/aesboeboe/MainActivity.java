@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.ShareActionProvider;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -35,6 +37,7 @@ public class MainActivity extends Activity {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
+    private ShareActionProvider mShareActionProvider;
 
 
     @Override
@@ -42,7 +45,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivityContext = this;
-        setTitle("");
 
         ImageButton search = (ImageButton) findViewById(R.id.btSearch);
         ImageButton oppositeDirection = (ImageButton) findViewById(R.id.btOppositeDirection);
@@ -114,8 +116,20 @@ public class MainActivity extends Activity {
                 SharedPreferences settings = getSharedPreferences("Home", 0);
                 to.setText(settings.getString("home", ""));
 
+          //      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"
+           //             + 123)));
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "send To: "));
+
             }
+
         });
+
+
         home.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -175,6 +189,12 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+
+
+
+
+
         @Override
         protected void onResume(){
             super.onResume();
@@ -209,6 +229,12 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.menu_item_share);
+        mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        mShareActionProvider.setShareIntent(doShare());
+
+
         return true;
     }
 
@@ -228,6 +254,13 @@ public class MainActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+    public Intent doShare() {
+        // populate the share intent with data
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "Put whatever you want");
+        return intent;
     }
 
     private void startSearch() {
