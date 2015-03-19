@@ -116,15 +116,6 @@ public class MainActivity extends Activity {
                 SharedPreferences settings = getSharedPreferences("Home", 0);
                 to.setText(settings.getString("home", ""));
 
-          //      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"
-           //             + 123)));
-
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "send To: "));
-
             }
 
         });
@@ -256,10 +247,10 @@ public class MainActivity extends Activity {
 
     }
     public Intent doShare() {
-        // populate the share intent with data
+
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "Put whatever you want");
+        intent.putExtra(Intent.EXTRA_TEXT, getTextToShare());
         return intent;
     }
 
@@ -344,4 +335,19 @@ public class MainActivity extends Activity {
 
         return new String(hour + ":" + (minute > 0 ? minute > 9 ? minute : "0" + minute : "00"));
     }
+
+    private String getTextToShare(){
+         String shareText =
+               "Von:" + "\t"  + from.getText().toString() + "\r\n" +
+               "Nach:"+ "\t"  +to.getText().toString() + "\r\n" +
+               "Datum:"+ "\t"  + getDateString(date) + "\r\n" +
+               "Zeit:"+ "\t" +getTimeString(time);
+
+
+
+        return shareText;
+    };
+
+
+
 }
