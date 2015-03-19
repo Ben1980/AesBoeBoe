@@ -24,6 +24,7 @@ Features:
 	- Während der Suche wird dem User angezeigt, dass etwas passiert. z.B. ein „Bitte Warten“-Dialog oder ein einfacher Indicator.
 	- Autovervollständigung
 	- Daten werden gespeichert und wider hergestellt
+	- Home button für den Weg nach Hause (lange drücken um aktuelle Station (von) als home zu setzen) (kurz drücken um home Verbindung nach home zu suchen)
 	
 ##ToDo:
 
