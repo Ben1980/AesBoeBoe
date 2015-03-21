@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label=""
+            android:label="About us"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
