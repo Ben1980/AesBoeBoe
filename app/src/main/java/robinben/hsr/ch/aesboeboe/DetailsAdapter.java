@@ -1,6 +1,8 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import ch.schoeb.opendatatransport.model.Section;
 public class DetailsAdapter extends BaseAdapter {
     private Context context;
     private List<Section> sections;
+    private String shareProviderDeparture = "";
+    private String shareProviderArrival = "";
 
     public DetailsAdapter(Context context) {
         this.context = context;
@@ -58,6 +62,9 @@ public class DetailsAdapter extends BaseAdapter {
 
         setStation(position, station, arrival, departure, rail);
 
+        Globals.ShareActionProvider.setShareIntent(doShare());
+        Log.d("***********************", "*************"+station.getText().toString() +arrival.getText().toString() +station.getText().toString());
+        Log.d("++++++++", "+++++" + convertView.toString());
         return convertView;
     }
 
@@ -75,12 +82,18 @@ public class DetailsAdapter extends BaseAdapter {
             String departureTime = formateDepartureArrivalTime(section.getDeparture().getDeparture());
             departure.setText(departureTime);
             rail.setText(section.getDeparture().getPlatform());
+
+
+            shareProviderDeparture = section.getDeparture().getStation().getName() +",\tab:\t" +departureTime +",\tGleis:\t" +rail.getText().toString();
+
         }
         if (position == getCount() - 1) {    //Last Station: Only arrival should be shown
             station.setText(section.getArrival().getStation().getName());
             String arrivalTime = formateDepartureArrivalTime(section.getArrival().getArrival());
             arrival.setText(arrivalTime);
             rail.setText(section.getArrival().getPlatform());
+
+            shareProviderArrival = section.getArrival().getStation().getName() +"\tan:\t" +arrivalTime  +",\tGleis:\t" +rail.getText().toString() ;
         }
         if(position > 0 && position < getCount() - 1) {
             station.setText(section.getDeparture().getStation().getName());
@@ -104,5 +117,19 @@ public class DetailsAdapter extends BaseAdapter {
         }
 
         return new String();
+
+
+    };
+
+    public Intent doShare() {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, TextToShare());
+        return intent;
+    }
+    private String TextToShare() {
+        return shareProviderDeparture + "\r\n" + shareProviderArrival;
+
     }
 }

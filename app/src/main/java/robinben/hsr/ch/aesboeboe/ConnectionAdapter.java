@@ -1,6 +1,7 @@
 package robinben.hsr.ch.aesboeboe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import ch.schoeb.opendatatransport.model.Connection;
 public class ConnectionAdapter extends BaseAdapter {
     private Context context;
     private List<Connection> connections;
+    private String listToShare = "";
 
     public ConnectionAdapter(Context context) {
         this.context = context;
@@ -72,6 +74,10 @@ public class ConnectionAdapter extends BaseAdapter {
             delay.setText(String.valueOf(delayTime) + "m");
         }
 
+        addToListToShare(departureTime + "\t" + arrivalTime + "\t" + durationTime);
+
+        Globals.ShareActionProvider.setShareIntent(doShare());
+
         return convertView;
     }
 
@@ -103,5 +109,24 @@ public class ConnectionAdapter extends BaseAdapter {
         }
 
         return delay;
+    }
+
+    public Intent doShare() {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, getTextToShare());
+        return intent;
+    }
+    private String getTextToShare() {
+        String textToShare;
+
+        textToShare =Globals.headerToShare +"\r\n" + "Abfahrt"  + "\t" + "Ankunft" + "\t" +"Dauer" + "\r\n" +listToShare;
+
+        return textToShare;
+    }
+
+    private String addToListToShare(String text){
+        return listToShare = listToShare  + "\r\n" + text;
     }
 }

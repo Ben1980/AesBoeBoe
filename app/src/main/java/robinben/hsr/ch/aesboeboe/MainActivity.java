@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ import ch.schoeb.opendatatransport.model.Station;
 import ch.schoeb.opendatatransport.model.StationList;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  {
     private AutoCompleteTextView from;
     private AutoCompleteTextView via;
     private AutoCompleteTextView to;
@@ -37,7 +38,7 @@ public class MainActivity extends Activity {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
-    private ShareActionProvider mShareActionProvider;
+    //private ShareActionProvider mShareActionProvider;
 
 
     @Override
@@ -57,6 +58,7 @@ public class MainActivity extends Activity {
         isArrivalTime = (ToggleButton) findViewById(R.id.btIsArrivalTime);
         isArrivalTime.setTextOff(getString(R.string.departureTime));
         isArrivalTime.setTextOn(getString(R.string.arrivalTime));
+
 
         stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         from.setAdapter(stationListAdapter);
@@ -115,6 +117,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 SharedPreferences settings = getSharedPreferences("Home", 0);
                 to.setText(settings.getString("home", ""));
+                Globals.ShareActionProvider.setShareIntent(doShare());
 
             }
 
@@ -149,6 +152,11 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (Globals.ShareActionProvider != null){
+                    Globals.ShareActionProvider.setShareIntent(doShare());
+                }
+
+
             }
         });
         to.addTextChangedListener(new TextWatcher() {
@@ -163,6 +171,9 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (Globals.ShareActionProvider != null){
+                    Globals.ShareActionProvider.setShareIntent(doShare());
+                }
             }
         });
         via.addTextChangedListener(new TextWatcher() {
@@ -177,6 +188,9 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (Globals.ShareActionProvider != null) {
+                    Globals.ShareActionProvider.setShareIntent(doShare());
+                }
             }
         });
     }
@@ -222,12 +236,13 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         MenuItem menuItem = menu.findItem(R.id.menu_item_share);
-        mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
-        mShareActionProvider.setShareIntent(doShare());
-
+        Globals.ShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        Globals.ShareActionProvider.setShareIntent(doShare());
 
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -241,13 +256,19 @@ public class MainActivity extends Activity {
                 final Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.menu_item_share:
+
+
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
-    public Intent doShare() {
 
+    public Intent doShare() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, getTextToShare());
@@ -343,8 +364,7 @@ public class MainActivity extends Activity {
                "Datum:"+ "\t"  + getDateString(date) + "\r\n" +
                "Zeit:"+ "\t" +getTimeString(time);
 
-
-
+        Globals.headerToShare = shareText;
         return shareText;
     };
 
