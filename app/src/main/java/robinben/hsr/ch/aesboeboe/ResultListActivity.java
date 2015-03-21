@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,6 @@ public class ResultListActivity extends Activity {
     private ListView listView;
     private boolean isArrivalTime;
     private Context context = this;
-    //private SearchWorker searchWorker = new SearchWorker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,6 +209,7 @@ public class ResultListActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -261,4 +262,5 @@ public class ResultListActivity extends Activity {
             }
         }
     }
+
 };

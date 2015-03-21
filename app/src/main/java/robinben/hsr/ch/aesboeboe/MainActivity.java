@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.ShareActionProvider;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -25,7 +28,7 @@ import ch.schoeb.opendatatransport.model.Station;
 import ch.schoeb.opendatatransport.model.StationList;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  {
     private AutoCompleteTextView from;
     private AutoCompleteTextView via;
     private AutoCompleteTextView to;
@@ -35,6 +38,7 @@ public class MainActivity extends Activity {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
+    //private ShareActionProvider mShareActionProvider;
 
 
     @Override
@@ -42,7 +46,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivityContext = this;
-        setTitle("");
 
         ImageButton search = (ImageButton) findViewById(R.id.btSearch);
         ImageButton oppositeDirection = (ImageButton) findViewById(R.id.btOppositeDirection);
@@ -55,6 +58,7 @@ public class MainActivity extends Activity {
         isArrivalTime = (ToggleButton) findViewById(R.id.btIsArrivalTime);
         isArrivalTime.setTextOff(getString(R.string.departureTime));
         isArrivalTime.setTextOn(getString(R.string.arrivalTime));
+
 
         stationListAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stationNameList);
         from.setAdapter(stationListAdapter);
@@ -113,9 +117,13 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 SharedPreferences settings = getSharedPreferences("Home", 0);
                 to.setText(settings.getString("home", ""));
+                Globals.ShareActionProvider.setShareIntent(doShare());
 
             }
+
         });
+
+
         home.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -144,6 +152,11 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (Globals.ShareActionProvider != null){
+                    Globals.ShareActionProvider.setShareIntent(doShare());
+                }
+
+
             }
         });
         to.addTextChangedListener(new TextWatcher() {
@@ -158,6 +171,9 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (Globals.ShareActionProvider != null){
+                    Globals.ShareActionProvider.setShareIntent(doShare());
+                }
             }
         });
         via.addTextChangedListener(new TextWatcher() {
@@ -172,9 +188,18 @@ public class MainActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (Globals.ShareActionProvider != null) {
+                    Globals.ShareActionProvider.setShareIntent(doShare());
+                }
             }
         });
     }
+
+
+
+
+
+
         @Override
         protected void onResume(){
             super.onResume();
@@ -209,8 +234,15 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.menu_item_share);
+        Globals.ShareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        Globals.ShareActionProvider.setShareIntent(doShare());
+
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -224,10 +256,23 @@ public class MainActivity extends Activity {
                 final Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.menu_item_share:
+
+
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    public Intent doShare() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, getTextToShare());
+        return intent;
     }
 
     private void startSearch() {
@@ -311,4 +356,18 @@ public class MainActivity extends Activity {
 
         return new String(hour + ":" + (minute > 0 ? minute > 9 ? minute : "0" + minute : "00"));
     }
+
+    private String getTextToShare(){
+         String shareText =
+               "Von:" + "\t"  + from.getText().toString() + "\r\n" +
+               "Nach:"+ "\t"  +to.getText().toString() + "\r\n" +
+               "Datum:"+ "\t"  + getDateString(date) + "\r\n" +
+               "Zeit:"+ "\t" +getTimeString(time);
+
+        Globals.headerToShare = shareText;
+        return shareText;
+    };
+
+
+
 }
