@@ -1,8 +1,13 @@
-# AesBoeBoe
-----
+AesBoeBoe
+==========
 
-Features:
----------
+Authoren:
+Benjamin Mahr, e-mail: ben.mahr@gmail.com
+Robin Hauser, e-mail: rhauser@acutronic.ch
+
+
+Minimum Requirements:
+---------------------
 
  - Suche von mindesten vier Verbindungen von A nach B
  - Suche läuft im Hintergrund (AsyncTask)
@@ -11,34 +16,30 @@ Features:
  - Namen / E-Mail Adressen der Team-Mitglieder werden angezeigt
  - Wireframes
  
- - Zusatz:
-    - App-Icon ist gesetzt
-    - „Umgekehrte Richtung“ – Einfache Möglichkeit Von und Nach zu vertauschen. z.B. ein Button
-    - opendatatransport getDelay gibt bei Zügen ohne Verspähtung "0" zurück anstatt null
-    - Anzeigen von Verspätungen
-    - Detailscreen
-    - Suche der Verbindung zu einem spezifischen Zeitpunkt
-	- mit Next springt der Cursor zum nächsten Input feld
-	- Angabe ob gewählte Zeitpunkt die Ankunfts- oder Abfahrts-Zeit ist
-	- Date und Time picker
-	- Während der Suche wird dem User angezeigt, dass etwas passiert. z.B. ein „Bitte Warten“-Dialog oder ein einfacher Indicator.
-	- Autovervollständigung
-	- Daten werden gespeichert und wider hergestellt
-	- Home button für den Weg nach Hause (lange drücken um aktuelle Station (von) als home zu setzen) (kurz drücken um home Verbindung nach home zu suchen)
-	- Spätere Verbindungen anzeigen für gesuchte Verbindung
-	- Frühere Verbindungen anzeigen für gesuchte Verbindung
-	- Senden von Verbindungen an Freunde
+ Zusätzlich Funktionen:
+ ----------------------
+ - App-Icon im Action Bar gesetzt
+ - „Umgekehrte Richtung“ – Einfache Möglichkeit Von und Nach zu vertauschen
+ - Eingabe einer Via station
+ - opendatatransport getDelay gibt bei Zügen ohne Verspähtung "0" zurück anstatt null
+ - Anzeigen von Verspätungen
+ - Detailscreen mit den genauen Ab und Ankunftsdetails
+ - Suche der Verbindung zu einem spezifischen Zeitpunkt
+ - mit Next springt der Cursor zum nächsten Input feld
+ - Angabe ob gewählte Zeitpunkt die Ankunfts- oder Abfahrts-Zeit ist
+ - Date und Time picker für einfacher Eingabe
+ - Während der Suche wird dem User angezeigt, mit einem Spinner angezeigt das die Suche läuft. 
+ - Autovervollständigung der Stationseingaben
+ - Daten werden gespeichert und wider hergestellt beim neu starten der app wie beim zurück springen
+ - Home button für den Weg nach Hause (lange drücken um aktuelle Station (von) als home zu setzen) (kurz drücken um home Verbindung nach home zu suchen) + Toast
+ - Spätere Verbindungen anzeigen für gesuchte Verbindung
+ - Frühere Verbindungen anzeigen für gesuchte Verbindung
+ - Senden von Verbindungen an Freunde via mail oder anderen installierten apps. 
+ - Zeigen eines Toasts wenn keine Verbindung mit dem Server besteht. 
+ - Button (Trash) für einfaches löschen der Eingabefelder.
 	
-##ToDo:
+	
 
-Ben
----
-   
-
-Robin
------
-
-  
   
   
   
