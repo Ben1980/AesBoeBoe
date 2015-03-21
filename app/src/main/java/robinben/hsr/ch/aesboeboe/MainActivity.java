@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +36,6 @@ public class MainActivity extends Activity  {
     private ArrayAdapter stationListAdapter;
     private Context mainActivityContext;
     private ToggleButton isArrivalTime;
-    //private ShareActionProvider mShareActionProvider;
 
 
     @Override
@@ -196,10 +193,6 @@ public class MainActivity extends Activity  {
     }
 
 
-
-
-
-
         @Override
         protected void onResume(){
             super.onResume();
@@ -256,11 +249,6 @@ public class MainActivity extends Activity  {
                 final Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
-
-            case R.id.menu_item_share:
-
-
-
 
             default:
                 return super.onOptionsItemSelected(item);
