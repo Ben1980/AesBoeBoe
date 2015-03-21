@@ -63,8 +63,6 @@ public class DetailsAdapter extends BaseAdapter {
         setStation(position, station, arrival, departure, rail);
 
         Globals.ShareActionProvider.setShareIntent(doShare());
-        Log.d("***********************", "*************"+station.getText().toString() +arrival.getText().toString() +station.getText().toString());
-        Log.d("++++++++", "+++++" + convertView.toString());
         return convertView;
     }
 
