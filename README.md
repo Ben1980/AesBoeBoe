@@ -21,11 +21,11 @@ Minimum Requirements:
  - App-Icon im Action Bar gesetzt
  - „Umgekehrte Richtung“ – Einfache Möglichkeit Von und Nach zu vertauschen
  - Eingabe einer Via station
- - opendatatransport getDelay gibt bei Zügen ohne Verspähtung "0" zurück anstatt null
+ - Opendatatransport getDelay gibt bei Zügen ohne Verspätung "0" zurück anstatt null
  - Anzeigen von Verspätungen
- - Detailscreen mit den genauen Ab und Ankunftsdetails
+ - Detail screen mit den genauen Ab und Ankunftsdetails
  - Suche der Verbindung zu einem spezifischen Zeitpunkt
- - mit Next springt der Cursor zum nächsten Input feld
+ - mit Next springt der Cursor zum nächsten Input Feld
  - Angabe ob gewählte Zeitpunkt die Ankunfts- oder Abfahrts-Zeit ist
  - Date und Time picker für einfacher Eingabe
  - Während der Suche wird dem User angezeigt, mit einem Spinner angezeigt das die Suche läuft. 
